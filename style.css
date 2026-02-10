@@ -726,10 +726,13 @@ button {
   font-size: 0.9rem;
   border-radius: 8px;
   text-decoration: none;
+  border: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 0.5rem;
   box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
   width: 100%;
+  font-family: inherit;
 }
 
 .service-card__button:hover {
@@ -841,6 +844,13 @@ button {
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.service-modal__gallery img:hover,
+.service-modal__gallery video:hover {
+  transform: scale(1.05);
 }
 
 .service-modal__video {

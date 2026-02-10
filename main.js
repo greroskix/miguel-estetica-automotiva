@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
     higienizacao: {
       title: "Higienização interna",
       price: "A partir de R$ 250",
-      description: "Nossa higienização interna é um processo completo e profissional que remove profundamente toda sujeira, odores e bactérias do interior do seu veículo. Utilizamos equipamentos de alta pressão e produtos específicos para cada tipo de material.",
+      description: "Nossa higienização interna é um processo completo e profissional que remove profundamente toda sujeira, odores e bactérias do interior do seu veículo. Utilizamos equipamentos de alta pressão e produtos específicos para cada tipo de material, garantindo um interior impecável e higienizado.",
       features: [
         "Limpeza profunda de bancos (couro, tecido ou alcântara)",
         "Higienização completa do teto e painel",
@@ -317,7 +317,7 @@ document.addEventListener("DOMContentLoaded", () => {
     polimento: {
       title: "Polimento técnico",
       price: "A partir de R$ 400",
-      description: "O polimento técnico é realizado por profissionais especializados que utilizam técnicas avançadas para corrigir micro riscos, marcas de envelhecimento e oxidação da pintura. Devolvemos o brilho original do seu veículo com acabamento de zero km.",
+      description: "O polimento técnico é realizado por profissionais especializados que utilizam técnicas avançadas para corrigir micro riscos, marcas de envelhecimento e oxidação da pintura. Devolvemos o brilho original do seu veículo com acabamento de zero km, utilizando produtos premium importados.",
       features: [
         "Correção de micro riscos e marcas",
         "Remoção de oxidação e manchas",
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     vitrificacao: {
       title: "Vitrificação de pintura",
       price: "A partir de R$ 600",
-      description: "A vitrificação é a proteção mais avançada disponível para a pintura do seu veículo. Forma uma camada transparente e resistente que protege contra raios UV, chuva ácida, poluição e outros agentes externos, mantendo o brilho por até 12 meses.",
+      description: "A vitrificação é a proteção mais avançada disponível para a pintura do seu veículo. Forma uma camada transparente e resistente que protege contra raios UV, chuva ácida, poluição e outros agentes externos, mantendo o brilho por até 12 meses. O efeito hidrofóbico faz com que a água escorra facilmente, facilitando a limpeza.",
       features: [
         "Proteção contra raios UV",
         "Resistência à chuva ácida e poluição",
@@ -377,8 +377,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </ul>
       
       <div class="service-modal__cta">
-        <a href="#agendar" class="btn btn--primary" onclick="document.getElementById('service-modal').classList.remove('active');">Agendar serviço</a>
-        <a href="https://wa.me/5511943219718?text=Tenho+interesse+em+${encodeURIComponent(service.title)}" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp-primary" onclick="document.getElementById('service-modal').classList.remove('active');">Falar no WhatsApp</a>
+        <a href="#agendar" class="btn btn--primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Agendar serviço</a>
+        <a href="https://wa.me/5511943219718?text=Tenho+interesse+em+${encodeURIComponent(service.title)}" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp-primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Falar no WhatsApp</a>
       </div>
     `;
 
@@ -399,16 +399,20 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  serviceModalClose.addEventListener("click", closeServiceModal);
+  if (serviceModalClose) {
+    serviceModalClose.addEventListener("click", closeServiceModal);
+  }
 
-  serviceModal.addEventListener("click", (e) => {
-    if (e.target === serviceModal || e.target.classList.contains("service-modal__overlay")) {
-      closeServiceModal();
-    }
-  });
+  if (serviceModal) {
+    serviceModal.addEventListener("click", (e) => {
+      if (e.target === serviceModal || e.target.classList.contains("service-modal__overlay")) {
+        closeServiceModal();
+      }
+    });
+  }
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && serviceModal.classList.contains("active")) {
+    if (e.key === "Escape" && serviceModal && serviceModal.classList.contains("active")) {
       closeServiceModal();
     }
   });
