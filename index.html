@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Miguel Estética Automotiva</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Header / navegação -->
+    <header class="topbar">
+      <div class="container topbar__inner">
+        <div class="logo">
+          <img src="assets/logo-carro.png" alt="Logo Estética Automotiva" />
+          <span>Miguel Estética Automotiva</span>
+        </div>
+        <nav class="nav">
+          <a href="#home" class="nav__link active">Início</a>
+          <a href="#about" class="nav__link">Sobre</a>
+          <a href="#services" class="nav__link">Serviços</a>
+          <a href="#contact" class="nav__link">Contato</a>
+        </nav>
+        <div class="topbar__actions">
+          <a href="https://www.instagram.com/miguelesteticaautomotiva/" target="_blank" class="btn btn--instagram-header" aria-label="Instagram">
+            Instagram
+          </a>
+          <a href="https://wa.me/5511943219718?text=Tenho+interesse+em+agendar+um+serviço" target="_blank" class="btn btn--whatsapp-header">
+            WhatsApp
+          </a>
+        </div>
+        <button class="menu-toggle" aria-label="Menu" id="menu-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+      <nav class="nav-mobile" id="nav-mobile">
+        <a href="#home" class="nav-mobile__link">Início</a>
+        <a href="#about" class="nav-mobile__link">Sobre</a>
+        <a href="#services" class="nav-mobile__link">Serviços</a>
+        <a href="#contact" class="nav-mobile__link">Contato</a>
+        <a href="https://www.instagram.com/miguelesteticaautomotiva/" target="_blank" class="nav-mobile__link nav-mobile__instagram">Instagram</a>
+        <a href="https://wa.me/5511943219718?text=Tenho+interesse+em+agendar+um+serviço" target="_blank" class="nav-mobile__link nav-mobile__whatsapp">WhatsApp</a>
+      </nav>
+    </header>
+
+    <!-- Seção hero -->
+    <main id="home" class="hero">
+      <div class="container hero__inner reveal">
+        <section class="hero__content">
+          <p class="hero__eyebrow">Miguel Estética Automotiva</p>
+          <h1 class="hero__title">
+            Brilho de carro<br />
+            sem riscos é o<br />
+            nosso padrão.
+          </h1>
+          <p class="hero__subtitle">
+            Cuidamos de cada detalhe: pintura, interior e proteção completa do
+            seu veículo com produtos profissionais e técnica especializada.
+          </p>
+
+          <div class="hero__actions">
+            <a href="#contact" class="btn btn--primary">Agendar serviço</a>
+            <a href="#services" class="btn btn--secondary">Ver serviços</a>
+          </div>
+        </section>
+
+        <aside class="hero__image-wrapper">
+          <div class="hero__image-border"></div>
+          <div class="hero__image-glow"></div>
+          <img
+            src="assets/img/carro-inicio-exposicao.JPG"
+            alt="Carro em exposição após tratamento estético automotivo"
+            class="hero__image"
+          />
+        </aside>
+      </div>
+    </main>
+
+    <!-- Seção de serviços -->
+    <section id="services" class="section section--border reveal">
+      <div class="container section__inner">
+        <div>
+          <h2 class="section__title">Serviços que valorizam seu carro</h2>
+          <p class="section__subtitle">
+            Do básico ao detalhamento completo, montamos um pacote ideal para
+            o uso do seu veículo.
+          </p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <h3>Higienização interna</h3>
+            <p>
+              Limpeza profunda de bancos, teto, painel e carpete, eliminando
+              odores e manchas.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Polimento técnico</h3>
+            <p>
+              Correção de micro riscos e marcas na pintura, devolvendo o brilho
+              de zero km.
+            </p>
+          </article>
+          <article class="card">
+            <h3>Vitrificação de pintura</h3>
+            <p>
+              Proteção avançada contra sol, chuva ácida e sujeira, com alto
+              nível de brilho.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção sobre -->
+    <section id="about" class="section section--dark reveal">
+      <div class="container section__inner">
+        <div>
+          <h2 class="section__title">Sobre a Miguel Estética Automotiva</h2>
+          <p class="section__subtitle">
+            Transformando carros em obras de arte desde 2020.
+          </p>
+        </div>
+        <div class="about">
+          <div class="about__text">
+            <p>
+              A <strong>Miguel Estética Automotiva</strong> nasceu da paixão por carros e do compromisso em oferecer serviços de excelência em estética automotiva. Com anos de experiência no mercado, nos especializamos em devolver o brilho e a proteção que seu veículo merece.
+            </p>
+            <p>
+              Utilizamos apenas produtos premium e técnicas profissionais reconhecidas internacionalmente. Cada serviço é executado com atenção aos mínimos detalhes, garantindo resultados que superam as expectativas dos nossos clientes.
+            </p>
+            <p>
+              Nossa missão é preservar e valorizar seu investimento, mantendo seu carro sempre com aspecto de zero km, protegido contra as intempéries e com aquele brilho que chama atenção por onde passa.
+            </p>
+          </div>
+          <div class="about__stats">
+            <div class="about__stat">
+              <span class="about__stat-number">+40</span>
+              <span class="about__stat-label">Carros revitalizados</span>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-number">5.0</span>
+              <span class="about__stat-label">Avaliação média no Google</span>
+              <a
+                href="https://www.google.com/maps/place/Miguel+Est%C3%A9tica+Automotiva/@-23.4968646,-46.2953356,15z/data=!4m6!3m5!1s0x94ce7b00475f0465:0xb250761081d84bef!8m2!3d-23.5048358!4d-46.3494385!16s%2Fg%2F11wn5vzhry?entry=ttu&g_ep=EgoyMDI2MDIwNC4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="about__stat-btn"
+              >
+                Ver avaliações no Maps
+              </a>
+            </div>
+            <div class="about__stat">
+              <span class="about__stat-number">100%</span>
+              <span class="about__stat-label">Foco em satisfação</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de contato -->
+    <section id="contact" class="section section--dark section--border reveal">
+      <div class="container section__inner section__inner--contact">
+        <div>
+          <h2 class="section__title">Solicite um orçamento</h2>
+          <p class="section__subtitle">
+            Envie os dados do seu veículo que retornamos com as melhores opções
+            para você.
+          </p>
+        </div>
+        <form class="form">
+          <div class="form__row">
+            <div class="form__field">
+              <label for="name">Nome</label>
+              <input id="name" type="text" placeholder="Seu nome completo" />
+            </div>
+            <div class="form__field">
+              <label for="phone">WhatsApp</label>
+              <input
+                id="phone"
+                type="tel"
+                placeholder="(00) 00000-0000"
+              />
+            </div>
+          </div>
+          <div class="form__row">
+            <div class="form__field">
+              <label for="car">Carro</label>
+              <input
+                id="car"
+                type="text"
+                placeholder="Modelo e ano do veículo"
+              />
+            </div>
+            <div class="form__field">
+              <label for="service">Serviço de interesse</label>
+              <select id="service">
+                <option value="">Selecione</option>
+                <option>Higienização interna</option>
+                <option>Polimento técnico</option>
+                <option>Vitrificação de pintura</option>
+                <option>Pacote completo</option>
+              </select>
+            </div>
+          </div>
+          <div class="form__field">
+            <label for="message">Mensagem</label>
+            <textarea
+              id="message"
+              rows="3"
+              placeholder="Conte rapidamente o que você precisa..."
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full">
+            Enviar pelo WhatsApp
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <span>© 2026 Miguel Estética Automotiva</span>
+        <span>Cuidando do brilho e da limpeza do seu carro em cada detalhe.</span>
+      </div>
+    </footer>
+
+    <script src="main.js"></script>
+  </body>
+</html>
