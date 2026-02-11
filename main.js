@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Carrossel de imagens do hero
   const heroImage = document.querySelector(".hero__image");
   if (heroImage) {
     const images = [
@@ -26,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(changeImage, 4500);
   }
 
-  // Scroll reveal com throttling
   const revealElements = document.querySelectorAll(".reveal");
   let ticking = false;
   
@@ -51,7 +49,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Menu mobile
   const menuToggle = document.getElementById("menu-toggle");
   const navMobile = document.getElementById("nav-mobile");
   const navMobileLinks = document.querySelectorAll(".nav-mobile__link");
@@ -85,7 +82,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Smooth scroll
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       const href = this.getAttribute("href");
@@ -102,7 +98,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Animação de contador
   const animateCounter = (element, target, suffix = "", duration = 2000) => {
     let start = 0;
     const increment = target / (duration / 16);
@@ -140,7 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
     statNumbers.forEach((stat) => statsObserver.observe(stat));
   }
 
-  // Review cards animation
   const reviewCards = document.querySelectorAll(".review__card");
   if (reviewCards.length > 0) {
     reviewCards.forEach((card, index) => {
@@ -162,7 +156,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Header scroll com throttling
   let lastScroll = 0;
   let scrollTicking = false;
   const header = document.querySelector(".topbar");
@@ -199,37 +192,107 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: true });
   }
 
-  // Formulário
-  const form = document.querySelector(".form");
+  const form = document.getElementById("booking-form");
   if (form) {
-    const formFields = form.querySelectorAll("input, textarea, select");
+    const serviceCards = document.querySelectorAll(".service-selection__card");
+    const serviceInput = document.getElementById("service");
+    const nextBtn = document.querySelector(".form__next-btn");
+    const backBtn = document.querySelector(".form__back-btn");
+    const step1 = document.querySelector('[data-step="1"]');
+    const step2 = document.querySelector('[data-step="2"]');
+    const selectedServicePreview = document.getElementById("selected-service-preview");
+    const selectedServiceCustom = document.getElementById("selected-service-custom");
+    const selectedServiceImg = document.getElementById("selected-service-img");
+    const selectedServiceName = document.getElementById("selected-service-name");
+    const selectedServicePrice = document.getElementById("selected-service-price");
+    const selectedServiceCustomName = document.getElementById("selected-service-custom-name");
+    const selectedServiceCustomPrice = document.getElementById("selected-service-custom-price");
+    const customServiceField = document.getElementById("custom-service-field");
+    const customServiceTextarea = document.getElementById("custom-service");
+
+    let selectedService = null;
+
+    serviceCards.forEach((card) => {
+      card.addEventListener("click", function () {
+        serviceCards.forEach((c) => c.classList.remove("selected"));
+        this.classList.add("selected");
+        
+        const service = this.getAttribute("data-service");
+        const image = this.getAttribute("data-image");
+        const price = this.getAttribute("data-price");
+        
+        selectedService = service;
+        serviceInput.value = service;
+        nextBtn.disabled = false;
+        nextBtn.style.opacity = "1";
+        nextBtn.style.cursor = "pointer";
+
+        if (service === "personalizado") {
+          selectedServicePreview.style.display = "none";
+          selectedServiceCustom.style.display = "flex";
+          selectedServiceCustomName.textContent = "Serviço personalizado";
+          selectedServiceCustomPrice.textContent = price || "Sob consulta";
+        } else {
+          selectedServicePreview.style.display = "flex";
+          selectedServiceCustom.style.display = "none";
+          if (image) {
+            selectedServiceImg.src = image;
+            selectedServiceImg.alt = service;
+          }
+          selectedServiceName.textContent = service;
+          selectedServicePrice.textContent = `A partir de ${price}`;
+        }
+      });
+    });
+
+    nextBtn.addEventListener("click", function () {
+      if (selectedService) {
+        step1.classList.remove("form__step--active");
+        step2.classList.add("form__step--active");
+        
+        if (selectedService === "personalizado") {
+          customServiceField.style.display = "flex";
+          customServiceTextarea.required = true;
+          setTimeout(() => {
+            customServiceTextarea.focus();
+          }, 300);
+        } else {
+          customServiceField.style.display = "none";
+          customServiceTextarea.required = false;
+        }
+      }
+    });
+
+    backBtn.addEventListener("click", function () {
+      step2.classList.remove("form__step--active");
+      step1.classList.add("form__step--active");
+    });
+
+    const formFields = form.querySelectorAll("input, textarea");
     
     formFields.forEach((field) => {
-      field.addEventListener("focus", function () {
-        this.parentElement.style.transform = "scale(1.02)";
-        this.parentElement.style.transition = "transform 0.2s ease";
-      });
-      
-      field.addEventListener("blur", function () {
-        this.parentElement.style.transform = "scale(1)";
-      });
-      
       field.addEventListener("input", function () {
-        this.style.borderColor = this.value.length > 0 ? "rgba(33, 150, 243, 0.5)" : "";
+        if (this.value.length > 0) {
+          this.style.borderColor = "rgba(33, 150, 243, 0.5)";
+          this.parentElement.querySelector("label")?.style.setProperty("color", "#2196f3");
+        } else {
+          this.style.borderColor = "";
+          this.parentElement.querySelector("label")?.style.setProperty("color", "#b5b5b5");
+        }
       });
     });
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
+      const originalText = submitBtn.innerHTML;
       
-      submitBtn.textContent = "Enviando...";
+      submitBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px; animation: spin 1s linear infinite;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg> Enviando...';
       submitBtn.style.opacity = "0.7";
       submitBtn.disabled = true;
 
       setTimeout(() => {
-        submitBtn.textContent = "✓ Enviado!";
+        submitBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Enviado!';
         submitBtn.style.background = "linear-gradient(135deg, #25D366 0%, #20BA5A 100%)";
         
         setTimeout(() => {
@@ -237,22 +300,43 @@ document.addEventListener("DOMContentLoaded", () => {
           const name = document.getElementById("name")?.value || "";
           const car = document.getElementById("car")?.value || "";
           const service = document.getElementById("service")?.value || "";
+          const customService = document.getElementById("custom-service")?.value || "";
           const message = document.getElementById("message")?.value || "";
           
-          const whatsappMessage = `Olá! Meu nome é ${name}. Tenho interesse em ${service || "um serviço"} para meu veículo: ${car}. ${message ? `Mensagem: ${message}` : ""}`;
+          let serviceText = service;
+          if (service === "personalizado" && customService) {
+            serviceText = `Serviço personalizado: ${customService}`;
+          }
+          
+          const whatsappMessage = `Olá! Meu nome é ${name}. Tenho interesse em ${serviceText || "um serviço"} para meu veículo: ${car}. ${message ? `Mensagem: ${message}` : ""}`;
           window.open(`https://wa.me/5511943219718?text=${encodeURIComponent(whatsappMessage)}`, "_blank");
           
-          submitBtn.textContent = originalText;
+          submitBtn.innerHTML = originalText;
           submitBtn.style.background = "";
           submitBtn.style.opacity = "1";
           submitBtn.disabled = false;
           form.reset();
+          
+          if (step1 && step2) {
+            step2.classList.remove("form__step--active");
+            step1.classList.add("form__step--active");
+            serviceCards.forEach((c) => c.classList.remove("selected"));
+            if (nextBtn) {
+              nextBtn.disabled = true;
+              nextBtn.style.opacity = "0.5";
+            }
+            if (selectedServicePreview) {
+              selectedServicePreview.style.display = "none";
+            }
+            if (selectedServiceCustom) {
+              selectedServiceCustom.style.display = "none";
+            }
+          }
         }, 1500);
       }, 1000);
     });
   }
 
-  // Ripple effect
   if (!document.getElementById("ripple-styles")) {
     const rippleStyle = document.createElement("style");
     rippleStyle.id = "ripple-styles";
@@ -290,62 +374,75 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", createRipple);
   });
 
-  // Modal de Serviços
   const serviceModal = document.getElementById("service-modal");
   const serviceModalContent = document.getElementById("service-modal-content");
   const serviceModalClose = document.querySelector(".service-modal__close");
   const serviceButtons = document.querySelectorAll(".service-card__button[data-service]");
 
   const serviceData = {
-    higienizacao: {
-      title: "Higienização interna",
-      price: "A partir de R$ 250",
-      description: "Nossa higienização interna é um processo completo e profissional que remove profundamente toda sujeira, odores e bactérias do interior do seu veículo. Utilizamos equipamentos de alta pressão e produtos específicos para cada tipo de material, garantindo um interior impecável e higienizado.",
+    "lavagem-tradicional": {
+      title: "Lavagem tradicional",
+      price: "A partir de R$ 60",
+      description: "Lavagem completa do veículo com produtos de qualidade. Preço varia conforme o tamanho do carro.",
       features: [
-        "Limpeza profunda de bancos (couro, tecido ou alcântara)",
-        "Higienização completa do teto e painel",
-        "Limpeza e desinfecção de carpete",
-        "Remoção de odores e manchas",
-        "Proteção e hidratação de materiais",
-        "Produtos profissionais e seguros"
+        "Lavagem completa externa",
+        "Limpeza de rodas e pneus",
+        "Secagem profissional",
+        "Produtos de qualidade",
+        "Preço varia conforme o tamanho do carro"
       ],
       images: [
-        "assets/img/carros-exposicao/carro1.jpeg",
-        "assets/img/carros-exposicao/carro2.jpeg"
+        "assets/img/lavagem-tradicional/molde1.jpg",
+        "assets/img/lavagem-tradicional/molde2.gif"
       ]
     },
-    polimento: {
-      title: "Polimento técnico",
-      price: "A partir de R$ 400",
-      description: "O polimento técnico é realizado por profissionais especializados que utilizam técnicas avançadas para corrigir micro riscos, marcas de envelhecimento e oxidação da pintura. Devolvemos o brilho original do seu veículo com acabamento de zero km, utilizando produtos premium importados.",
+    cristalizacao: {
+      title: "Lavagem tradicional + Cristalização de pára-brisa",
+      price: "A partir de R$ 90",
+      description: "Proteção e cristalização do pára-brisa com tratamento especializado. Inclui lavagem tradicional.",
       features: [
-        "Correção de micro riscos e marcas",
-        "Remoção de oxidação e manchas",
-        "Polimento em 3 etapas (composto, polimento e acabamento)",
-        "Produtos premium importados",
-        "Acabamento espelhado",
-        "Proteção da pintura original"
+        "Cristalização do pára-brisa",
+        "Proteção contra riscos",
+        "Melhor visibilidade",
+        "Inclui lavagem tradicional",
+        "Tratamento especializado"
+      ],
+      images: [
+        "assets/img/carros-exposicao/carro2.jpeg",
+        "assets/img/carros-exposicao/carro3.jpeg"
+      ]
+    },
+    "lavagem-detalhada": {
+      title: "Lavagem detalhada",
+      price: "A partir de R$ 150",
+      description: "Limpeza detalhada e cuidadosa do veículo, com atenção especial aos detalhes e acabamentos.",
+      features: [
+        "Limpeza detalhada completa",
+        "Atenção aos detalhes",
+        "Limpeza de acabamentos",
+        "Produtos premium",
+        "Acabamento impecável"
       ],
       images: [
         "assets/img/carros-exposicao/carro3.jpeg",
         "assets/img/carros-exposicao/carro4.jpeg"
       ]
     },
-    vitrificacao: {
-      title: "Vitrificação de pintura",
-      price: "A partir de R$ 600",
-      description: "A vitrificação é a proteção mais avançada disponível para a pintura do seu veículo. Forma uma camada transparente e resistente que protege contra raios UV, chuva ácida, poluição e outros agentes externos, mantendo o brilho por até 12 meses. O efeito hidrofóbico faz com que a água escorra facilmente, facilitando a limpeza.",
+    higienizacao: {
+      title: "Higienização interna",
+      price: "A partir de R$ 350",
+      description: "Limpeza profunda de bancos, teto, painel e carpete, eliminando odores e manchas. Preço varia conforme o carro.",
       features: [
-        "Proteção contra raios UV",
-        "Resistência à chuva ácida e poluição",
-        "Efeito hidrofóbico (água escorre)",
-        "Durabilidade de até 12 meses",
-        "Brilho intenso e duradouro",
-        "Facilita a limpeza do veículo"
+        "Limpeza profunda de bancos (couro, tecido ou alcântara)",
+        "Higienização completa do teto e painel",
+        "Limpeza e desinfecção de carpete",
+        "Remoção de odores e manchas",
+        "Proteção e hidratação de materiais",
+        "Preço varia conforme o carro"
       ],
       images: [
-        "assets/img/carros-exposicao/carro5.jpeg",
-        "assets/img/carros-exposicao/carro1.jpeg"
+        "assets/img/higienizacao-interna/molde1.gif",
+        "assets/img/higienizacao-interna/molde2.gif"
       ]
     }
   };
@@ -364,9 +461,13 @@ document.addEventListener("DOMContentLoaded", () => {
       
       ${service.images && service.images.length > 0 ? `
         <div class="service-modal__gallery">
-          ${service.images.map(img => `
-            <img src="${img}" alt="${service.title}" />
-          `).join('')}
+          ${service.images.map(img => {
+            if (img.endsWith('.mp4') || img.endsWith('.webm') || img.endsWith('.mov')) {
+              return `<video src="${img}" alt="${service.title}" controls autoplay loop muted playsinline></video>`;
+            } else {
+              return `<img src="${img}" alt="${service.title}" loading="lazy" />`;
+            }
+          }).join('')}
         </div>
       ` : ''}
       
@@ -389,6 +490,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeServiceModal = () => {
     serviceModal.classList.remove("active");
     document.body.style.overflow = "";
+    
+    const gallery = serviceModalContent.querySelector('.service-modal__gallery');
+    if (gallery) {
+      const mediaElements = gallery.querySelectorAll('img, video');
+      mediaElements.forEach(element => {
+        if (element.src && (element.src.endsWith('.gif') || element.src.includes('.gif'))) {
+          const src = element.src;
+          element.src = '';
+          setTimeout(() => {
+            element.src = src;
+          }, 10);
+        }
+      });
+    }
   };
 
   serviceButtons.forEach((button) => {

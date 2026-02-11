@@ -16,9 +16,12 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <!-- Header / navegação -->
     <header class="topbar">
       <div class="container topbar__inner">
         <div class="logo">
@@ -63,7 +66,6 @@
       </nav>
     </header>
 
-    <!-- Seção hero -->
     <main class="hero">
       <div class="container hero__inner reveal">
         <section class="hero__content">
@@ -93,7 +95,6 @@
       </div>
     </main>
 
-    <!-- Seção sobre -->
     <section id="about" class="section section--dark reveal">
       <div class="container section__inner">
         <div>
@@ -198,125 +199,203 @@
       </div>
     </section>
 
-    <!-- Seção de serviços -->
     <section id="services" class="section section--border reveal">
       <div class="container section__inner">
         <div>
-          <h2 class="section__title">Serviços que valorizam seu carro</h2>
+          <h2 class="section__title">Nossos Serviços</h2>
           <p class="section__subtitle">
-            Do básico ao detalhamento completo, montamos um pacote ideal para
-            o uso do seu veículo.
+            Serviços profissionais de estética automotiva para manter seu veículo sempre impecável
           </p>
         </div>
         <div class="services-grid">
           <article class="service-card">
             <div class="service-card__image">
-              <img src="assets/img/carros-exposicao/carro1.jpeg" alt="Higienização interna automotiva" />
+              <img src="assets/img/lavagem-tradicional/capa.jpg" alt="Lavagem tradicional automotiva" />
+            </div>
+            <div class="service-card__content">
+              <h3 class="service-card__title">Lavagem tradicional</h3>
+              <div class="service-card__price">A partir de R$ 60</div>
+              <p class="service-card__description">
+                Lavagem completa do veículo com produtos de qualidade. Preço varia conforme o tamanho do carro.
+            </p>
+              <button class="service-card__button" data-service="lavagem-tradicional">Saiba mais</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-card__image">
+              <img src="assets/img/carros-exposicao/carro2.jpeg" alt="Cristalização de pára-brisa automotiva" />
+            </div>
+            <div class="service-card__content">
+              <h3 class="service-card__title">Lavagem Tradicional + Cristalização de pára-brisa</h3>
+              <div class="service-card__price">A partir de R$ 90</div>
+              <p class="service-card__description">
+                Proteção e cristalização do pára-brisa com tratamento especializado. Inclui lavagem tradicional.
+            </p>
+              <button class="service-card__button" data-service="cristalizacao">Saiba mais</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-card__image">
+              <img src="assets/img/carros-exposicao/carro3.jpeg" alt="Lavagem detalhada automotiva" />
+            </div>
+            <div class="service-card__content">
+              <h3 class="service-card__title">Lavagem detalhada</h3>
+              <div class="service-card__price">A partir de R$ 150</div>
+              <p class="service-card__description">
+                Limpeza detalhada e cuidadosa do veículo, com atenção especial aos detalhes e acabamentos.
+            </p>
+              <button class="service-card__button" data-service="lavagem-detalhada">Saiba mais</button>
+            </div>
+          </article>
+
+          <article class="service-card">
+            <div class="service-card__image">
+              <img src="assets/img/higienizacao-interna/capa.jpeg" alt="Higienização interna automotiva" />
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Higienização interna</h3>
-              <div class="service-card__price">A partir de R$ 250</div>
+              <div class="service-card__price">A partir de R$ 350</div>
               <p class="service-card__description">
-                Limpeza profunda de bancos, teto, painel e carpete, eliminando odores e manchas. Utilizamos produtos profissionais para garantir um interior impecável.
+                Limpeza profunda de bancos, teto, painel e carpete, eliminando odores e manchas. Preço varia conforme o carro.
             </p>
               <button class="service-card__button" data-service="higienizacao">Saiba mais</button>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <div class="service-card__image">
-              <img src="assets/img/carros-exposicao/carro2.jpeg" alt="Polimento técnico automotivo" />
-            </div>
-            <div class="service-card__content">
-              <h3 class="service-card__title">Polimento técnico</h3>
-              <div class="service-card__price">A partir de R$ 400</div>
-              <p class="service-card__description">
-                Correção de micro riscos e marcas na pintura, devolvendo o brilho de zero km. Técnica profissional com produtos premium.
-            </p>
-              <button class="service-card__button" data-service="polimento">Saiba mais</button>
-            </div>
-          </article>
-
-          <article class="service-card">
-            <div class="service-card__image">
-              <img src="assets/img/carros-exposicao/carro3.jpeg" alt="Vitrificação de pintura automotiva" />
-            </div>
-            <div class="service-card__content">
-              <h3 class="service-card__title">Vitrificação de pintura</h3>
-              <div class="service-card__price">A partir de R$ 600</div>
-              <p class="service-card__description">
-                Proteção avançada contra sol, chuva ácida e sujeira, com alto nível de brilho. Durabilidade de até 12 meses.
-            </p>
-              <button class="service-card__button" data-service="vitrificacao">Saiba mais</button>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Seção de agendamento -->
     <section id="agendar" class="section section--dark section--border reveal">
       <div class="container section__inner section__inner--contact">
         <div>
           <h2 class="section__title">Agendar serviço</h2>
           <p class="section__subtitle">
-            Envie os dados do seu veículo que retornamos com as melhores opções
-            para você.
+            Envie os dados do seu veículo que retornamos com as melhores opções para você
           </p>
         </div>
-        <form class="form">
-          <div class="form__row">
-            <div class="form__field">
-              <label for="name">Nome</label>
-              <input id="name" type="text" placeholder="Seu nome completo" required />
+        <form class="form" id="booking-form">
+          <div class="form__step form__step--active" data-step="1">
+            <h3 class="form__step-title">Escolha o serviço</h3>
+            <div class="service-selection">
+              <div class="service-selection__grid">
+                <div class="service-selection__card" data-service="Lavagem tradicional" data-image="assets/img/lavagem-tradicional/capa.jpg" data-price="R$ 60">
+                  <div class="service-selection__card-image">
+                    <img src="assets/img/lavagem-tradicional/capa.jpg" alt="Lavagem tradicional" />
+                  </div>
+                  <div class="service-selection__card-content">
+                    <h4>Lavagem tradicional</h4>
+                    <span class="service-selection__card-price">A partir de R$ 60</span>
+                  </div>
+                </div>
+                <div class="service-selection__card" data-service="Lavagem tradicional + Cristalização de pára-brisa" data-image="assets/img/carros-exposicao/carro2.jpeg" data-price="R$ 90">
+                  <div class="service-selection__card-image">
+                    <img src="assets/img/carros-exposicao/carro2.jpeg" alt="Cristalização de pára-brisa" />
+                  </div>
+                  <div class="service-selection__card-content">
+                    <h4>Lavagem tradicional + Cristalização</h4>
+                    <span class="service-selection__card-price">A partir de R$ 90</span>
+                  </div>
+                </div>
+                <div class="service-selection__card" data-service="Lavagem detalhada" data-image="assets/img/carros-exposicao/carro3.jpeg" data-price="R$ 150">
+                  <div class="service-selection__card-image">
+                    <img src="assets/img/carros-exposicao/carro3.jpeg" alt="Lavagem detalhada" />
+                  </div>
+                  <div class="service-selection__card-content">
+                    <h4>Lavagem detalhada</h4>
+                    <span class="service-selection__card-price">A partir de R$ 150</span>
+                  </div>
+                </div>
+                <div class="service-selection__card" data-service="Higienização interna" data-image="assets/img/higienizacao-interna/capa.jpeg" data-price="R$ 350">
+                  <div class="service-selection__card-image">
+                    <img src="assets/img/higienizacao-interna/capa.jpeg" alt="Higienização interna" />
+                  </div>
+                  <div class="service-selection__card-content">
+                    <h4>Higienização interna</h4>
+                    <span class="service-selection__card-price">A partir de R$ 350</span>
+                  </div>
+                </div>
+                <div class="service-selection__card service-selection__card--custom" data-service="personalizado" data-price="Sob consulta">
+                  <div class="service-selection__card-icon-wrapper">
+                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(33, 150, 243, 0.15)"/>
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="rgba(33, 150, 243, 0.2)"/>
+                    </svg>
+                  </div>
+                  <div class="service-selection__card-content">
+                    <h4>Serviço personalizado</h4>
+                    <span class="service-selection__card-price">Sob consulta</span>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="form__field">
-              <label for="phone">WhatsApp</label>
-              <input
-                id="phone"
-                type="tel"
-                placeholder="(00) 00000-0000"
-                required
-              />
+            <input type="hidden" id="service" required />
+            <button type="button" class="btn btn--primary btn--full form__next-btn" disabled>
+              Continuar
+            </button>
+          </div>
+
+          <div class="form__step" data-step="2">
+            <div class="form__selected-service" id="selected-service-preview">
+              <div class="form__selected-service-image">
+                <img id="selected-service-img" src="" alt="" />
+              </div>
+              <div class="form__selected-service-info">
+                <h3 id="selected-service-name"></h3>
+                <span id="selected-service-price"></span>
+              </div>
+            </div>
+            <div class="form__selected-service-custom" id="selected-service-custom" style="display: none;">
+              <div class="form__selected-service-custom-icon">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(33, 150, 243, 0.15)"/>
+                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="rgba(33, 150, 243, 0.2)"/>
+                </svg>
+              </div>
+              <div class="form__selected-service-custom-info">
+                <h3 id="selected-service-custom-name"></h3>
+                <span id="selected-service-custom-price"></span>
+              </div>
+            </div>
+            <div class="form__fields-group">
+              <div class="form__row">
+                <div class="form__field">
+                  <label for="name">Nome</label>
+                  <input id="name" type="text" placeholder="Seu nome completo" required />
+                </div>
+                <div class="form__field">
+                  <label for="phone">WhatsApp</label>
+                  <input id="phone" type="tel" placeholder="(00) 00000-0000" required />
+                </div>
+              </div>
+              <div class="form__field">
+                <label for="car">Carro</label>
+                <input id="car" type="text" placeholder="Modelo e ano do veículo" required />
+              </div>
+              <div class="form__field form__field--spaced" id="custom-service-field" style="display: none;">
+                <label for="custom-service">Descreva o serviço personalizado</label>
+                <textarea id="custom-service" rows="3" placeholder="Descreva o serviço que você precisa..."></textarea>
+              </div>
+              <div class="form__field form__field--spaced">
+                <label for="message">Mensagem (opcional)</label>
+                <textarea id="message" rows="3" placeholder="Conte rapidamente o que você precisa..."></textarea>
+              </div>
+            </div>
+            <div class="form__actions">
+              <button type="button" class="btn btn--secondary form__back-btn">Voltar</button>
+              <button type="submit" class="btn btn--primary btn--whatsapp-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.372a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                </svg>
+                Enviar pelo WhatsApp
+              </button>
             </div>
           </div>
-          <div class="form__row">
-            <div class="form__field">
-              <label for="car">Carro</label>
-              <input
-                id="car"
-                type="text"
-                placeholder="Modelo e ano do veículo"
-                required
-              />
-            </div>
-            <div class="form__field">
-              <label for="service">Serviço de interesse</label>
-              <select id="service" required>
-                <option value="">Selecione</option>
-                <option>Higienização interna</option>
-                <option>Polimento técnico</option>
-                <option>Vitrificação de pintura</option>
-                <option>Pacote completo</option>
-              </select>
-            </div>
-          </div>
-          <div class="form__field">
-            <label for="message">Mensagem</label>
-            <textarea
-              id="message"
-              rows="3"
-              placeholder="Conte rapidamente o que você precisa..."
-            ></textarea>
-          </div>
-          <button type="submit" class="btn btn--primary btn--full">
-            Enviar pelo WhatsApp
-          </button>
         </form>
       </div>
     </section>
 
-    <!-- Seção de contato -->
     <section id="contact" class="section section--border reveal">
       <div class="container contact__container">
         <div class="contact__content">
@@ -326,7 +405,7 @@
           </h2>
           <div class="contact__info">
             <div class="contact__info-item">
-              <h3 class="contact__info-label">📍 Endereço</h3>
+              <h3 class="contact__info-label">🏢 Endereço</h3>
               <p class="contact__info-text">R. Iporá, 286 - Vila Florindo, Itaquaquecetuba - SP, 08574-060</p>
             </div>
             <div class="contact__info-item">
@@ -358,7 +437,6 @@
       </div>
     </section>
 
-    <!-- Rodapé -->
     <footer class="footer">
       <div class="container footer__inner">
         <span>© 2026 Miguel Estética Automotiva</span>
@@ -366,13 +444,11 @@
       </div>
     </footer>
 
-    <!-- Modal de Serviço -->
     <div class="service-modal" id="service-modal">
       <div class="service-modal__overlay"></div>
       <div class="service-modal__container">
         <button class="service-modal__close" aria-label="Fechar modal">&times;</button>
         <div class="service-modal__content" id="service-modal-content">
-          <!-- Conteúdo será inserido via JavaScript -->
         </div>
       </div>
     </div>
