@@ -658,7 +658,7 @@ button {
 /* Cards de Serviços */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
   margin-top: 2rem;
   align-items: start;
@@ -1772,7 +1772,7 @@ button {
 /* Media Queries */
 @media (min-width: 1200px) {
   .services-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 

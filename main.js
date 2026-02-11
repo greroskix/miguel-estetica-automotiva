@@ -227,10 +227,10 @@ document.addEventListener("DOMContentLoaded", () => {
         nextBtn.style.opacity = "1";
         nextBtn.style.cursor = "pointer";
 
-        if (service === "personalizado") {
+        if (service === "personalizado" || service === "Serviços personalizados") {
           selectedServicePreview.style.display = "none";
           selectedServiceCustom.style.display = "flex";
-          selectedServiceCustomName.textContent = "Serviço personalizado";
+          selectedServiceCustomName.textContent = service === "Serviços personalizados" ? "Serviços personalizados" : "Serviço personalizado";
           selectedServiceCustomPrice.textContent = price || "Sob consulta";
         } else {
           selectedServicePreview.style.display = "flex";
@@ -250,7 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
         step1.classList.remove("form__step--active");
         step2.classList.add("form__step--active");
         
-        if (selectedService === "personalizado") {
+        if (selectedService === "personalizado" || selectedService === "Serviços personalizados") {
           customServiceField.style.display = "flex";
           customServiceTextarea.required = true;
           setTimeout(() => {
@@ -304,8 +304,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const message = document.getElementById("message")?.value || "";
           
           let serviceText = service;
-          if (service === "personalizado" && customService) {
-            serviceText = `Serviço personalizado: ${customService}`;
+          if ((service === "personalizado" || service === "Serviços personalizados") && customService) {
+            serviceText = `Serviços personalizados: ${customService}`;
           }
           
           const whatsappMessage = `Olá! Meu nome é ${name}. Tenho interesse em ${serviceText || "um serviço"} para meu veículo: ${car}. ${message ? `Mensagem: ${message}` : ""}`;
@@ -412,6 +412,23 @@ document.addEventListener("DOMContentLoaded", () => {
         "assets/img/carros-exposicao/carro3.jpeg"
       ]
     },
+    "lavagem-motor": {
+      title: "Lavagem tradicional + Lavagem de motor",
+      price: "A partir de R$ 140",
+      description: "Lavagem completa do veículo com limpeza detalhada do motor. Inclui lavagem tradicional externa.",
+      features: [
+        "Lavagem completa externa",
+        "Limpeza detalhada do motor",
+        "Remoção de sujeira e óleo",
+        "Proteção de componentes elétricos",
+        "Secagem profissional",
+        "Produtos de qualidade"
+      ],
+      images: [
+        "assets/img/carros-exposicao/carro1.jpeg",
+        "assets/img/carros-exposicao/carro2.jpeg"
+      ]
+    },
     "lavagem-detalhada": {
       title: "Lavagem detalhada",
       price: "A partir de R$ 150",
@@ -443,6 +460,23 @@ document.addEventListener("DOMContentLoaded", () => {
       images: [
         "assets/img/higienizacao-interna/molde1.gif",
         "assets/img/higienizacao-interna/molde2.gif"
+      ]
+    },
+    "servicos-personalizados": {
+      title: "Serviços personalizados",
+      price: "Sob consulta",
+      description: "Combine diferentes serviços ou solicite tratamentos específicos para o seu veículo. Entre em contato e receba um orçamento personalizado de acordo com suas necessidades.",
+      features: [
+        "Combinação de múltiplos serviços",
+        "Tratamentos específicos sob medida",
+        "Orçamento personalizado",
+        "Atendimento consultivo",
+        "Soluções adaptadas ao seu veículo",
+        "Entre em contato para mais informações"
+      ],
+      images: [
+        "assets/img/carros-exposicao/carro1.jpeg",
+        "assets/img/carros-exposicao/carro2.jpeg"
       ]
     }
   };
@@ -479,7 +513,7 @@ document.addEventListener("DOMContentLoaded", () => {
       
       <div class="service-modal__cta">
         <a href="#agendar" class="btn btn--primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Agendar serviço</a>
-        <a href="https://wa.me/5511943219718?text=Tenho+interesse+em+${encodeURIComponent(service.title)}" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp-primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Falar no WhatsApp</a>
+        <a href="https://wa.me/5511943219718?text=${encodeURIComponent('Quero saber mais sobre ' + service.title.toLowerCase())}" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp-primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Falar no WhatsApp</a>
       </div>
     `;
 
