@@ -193,13 +193,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-  if (!document.getElementById("ripple-styles")) {
-    const rippleStyle = document.createElement("style");
-    rippleStyle.id = "ripple-styles";
-    rippleStyle.textContent = `.btn { position: relative; overflow: hidden; } @keyframes ripple-animation { to { transform: scale(4); opacity: 0; } }`;
-    document.head.appendChild(rippleStyle);
-  }
-
   const createRipple = (event) => {
     const button = event.currentTarget;
     const circle = document.createElement("span");
@@ -425,7 +418,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Modal de Agendamento
   const bookingModal = document.getElementById("booking-modal");
   const openBookingBtn = document.getElementById("open-booking-modal");
   const closeBookingBtn = document.querySelector(".booking-modal__close");
@@ -449,7 +441,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let currentBookingStep = 1;
   let selectedBookingService = null;
-  let selectedBookingServiceData = null;
 
   const openBookingModal = () => {
     if (bookingModal) {
@@ -461,7 +452,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  // Tornar a função global para uso em onclick
   window.openBookingModal = openBookingModal;
 
   const closeBookingModal = () => {
@@ -486,7 +476,6 @@ document.addEventListener("DOMContentLoaded", () => {
     bookingNextBtn.disabled = true;
     bookingNextBtn.style.opacity = "0.5";
     selectedBookingService = null;
-    selectedBookingServiceData = null;
     if (bookingForm) bookingForm.reset();
   };
 
@@ -519,15 +508,9 @@ document.addEventListener("DOMContentLoaded", () => {
     openBookingBtn.addEventListener("click", openBookingModal);
   }
 
-  // Links do menu que fazem scroll para a seção de agendamento
-  const navAgendarLink = document.getElementById("nav-agendar-link");
   const navMobileAgendarLink = document.getElementById("nav-mobile-agendar-link");
-  
-  // O scroll suave já é gerenciado pelo código de links com href="#"
-  // Apenas fechar o menu mobile se estiver aberto
   if (navMobileAgendarLink) {
     navMobileAgendarLink.addEventListener("click", () => {
-      // Fechar menu mobile se estiver aberto
       if (navMobile && navMobile.classList.contains("active")) {
         toggleMenu(false);
       }
@@ -546,7 +529,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Seleção de serviços
   bookingServiceCards.forEach((card) => {
     card.addEventListener("click", function () {
       bookingServiceCards.forEach((c) => c.classList.remove("selected"));
@@ -557,7 +539,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const price = this.getAttribute("data-price");
       
       selectedBookingService = service;
-      selectedBookingServiceData = { service, image, price };
       bookingServiceInput.value = service;
       bookingNextBtn.disabled = false;
       bookingNextBtn.style.opacity = "1";
@@ -581,7 +562,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Navegação entre steps
   if (bookingNextBtn) {
     bookingNextBtn.addEventListener("click", () => {
       if (selectedBookingService) {
@@ -609,7 +589,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Envio do formulário
+  const closeConfirmationBtn = document.querySelector(".booking-confirmation__close");
+  if (closeConfirmationBtn) {
+    closeConfirmationBtn.addEventListener("click", closeBookingModal);
+  }
+
   if (bookingForm) {
     bookingForm.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -630,13 +614,6 @@ document.addEventListener("DOMContentLoaded", () => {
       window.open(`https://wa.me/5511943219718?text=${encodeURIComponent(whatsappMessage)}`, "_blank");
       
       goToBookingStep(3);
-      
-      setTimeout(() => {
-        const closeConfirmationBtn = document.querySelector(".booking-confirmation__close");
-        if (closeConfirmationBtn) {
-          closeConfirmationBtn.addEventListener("click", closeBookingModal);
-        }
-      }, 100);
     });
   }
 });

@@ -374,35 +374,29 @@
       </div>
     </div>
 
-    <!-- Modal de Agendamento -->
     <div class="booking-modal" id="booking-modal">
       <div class="booking-modal__overlay"></div>
       <div class="booking-modal__container">
         <button class="booking-modal__close" aria-label="Fechar modal">&times;</button>
-        
-        <!-- Indicador de Progresso -->
         <div class="booking-progress">
-          <div class="booking-progress__step booking-progress__step--active" data-step="1">
+          <div class="booking-progress__step booking-progress__step--active">
             <div class="booking-progress__step-number">1</div>
             <div class="booking-progress__step-label">Serviço</div>
           </div>
           <div class="booking-progress__line"></div>
-          <div class="booking-progress__step" data-step="2">
+          <div class="booking-progress__step">
             <div class="booking-progress__step-number">2</div>
             <div class="booking-progress__step-label">Dados</div>
           </div>
           <div class="booking-progress__line"></div>
-          <div class="booking-progress__step" data-step="3">
+          <div class="booking-progress__step">
             <div class="booking-progress__step-number">3</div>
             <div class="booking-progress__step-label">Confirmação</div>
           </div>
         </div>
-
-        <!-- Conteúdo do Modal -->
         <div class="booking-modal__content">
           <form class="booking-form" id="booking-modal-form">
-            <!-- Step 1: Escolher Serviço -->
-            <div class="booking-step booking-step--active" data-booking-step="1">
+            <div class="booking-step booking-step--active">
               <h2 class="booking-step__title">Escolha o serviço</h2>
               <p class="booking-step__subtitle">Selecione o serviço que deseja agendar</p>
               
@@ -479,9 +473,7 @@
                 </button>
               </div>
             </div>
-
-            <!-- Step 2: Dados Pessoais -->
-            <div class="booking-step" data-booking-step="2">
+            <div class="booking-step">
               <h2 class="booking-step__title">Seus dados</h2>
               <p class="booking-step__subtitle">Preencha suas informações para continuar</p>
 
@@ -543,9 +535,7 @@
                 </button>
               </div>
             </div>
-
-            <!-- Step 3: Confirmação -->
-            <div class="booking-step" data-booking-step="3">
+            <div class="booking-step">
               <div class="booking-confirmation">
                 <div class="booking-confirmation__icon">
                   <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
