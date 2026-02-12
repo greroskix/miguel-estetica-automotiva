@@ -584,7 +584,39 @@ document.addEventListener("DOMContentLoaded", () => {
     bookingSteps.forEach((s, i) => s.classList.toggle("booking-step--active", i + 1 === step));
     currentBookingStep = step;
     updateBookingProgress();
+    if (step === 2) updateAgendarButtonState();
   };
+
+  const bookingAgendarBtn = bookingForm?.querySelector('button[type="submit"]');
+  const bookingNameEl = document.getElementById("booking-name");
+  const bookingPhoneEl = document.getElementById("booking-phone");
+  const bookingCarEl = document.getElementById("booking-car");
+
+  function isBookingStep2Valid() {
+    const name = (bookingNameEl?.value || "").trim();
+    const phoneRaw = (bookingPhoneEl?.value || "").trim();
+    const car = (bookingCarEl?.value || "").trim();
+    const phoneDigits = phoneRaw.replace(/\D/g, "");
+    if (!name || !car || phoneDigits.length < 10) return false;
+    if (selectedBookingService === "Serviços personalizados") {
+      const custom = (bookingCustomTextarea?.value || "").trim();
+      if (!custom) return false;
+    }
+    return true;
+  }
+
+  function updateAgendarButtonState() {
+    if (!bookingAgendarBtn) return;
+    const valid = isBookingStep2Valid();
+    bookingAgendarBtn.classList.toggle("btn--agendar--invalid", !valid);
+  }
+
+  [bookingNameEl, bookingPhoneEl, bookingCarEl, bookingCustomTextarea].forEach((el) => {
+    if (el) {
+      el.addEventListener("input", updateAgendarButtonState);
+      el.addEventListener("change", updateAgendarButtonState);
+    }
+  });
 
   if (openBookingBtn) {
     openBookingBtn.addEventListener("click", openBookingModal);
@@ -698,19 +730,18 @@ document.addEventListener("DOMContentLoaded", () => {
       const phoneDigits = phoneRaw.replace(/\D/g, "");
       const errors = [];
 
-      if (!name) errors.push("Preencha o nome completo.");
-      if (!car) errors.push("Preencha o modelo e ano do veículo.");
+      if (!name) errors.push("• Preencha o nome completo.");
+      if (!car) errors.push("• Preencha o modelo e ano do veículo.");
       if (!phoneRaw) {
-        errors.push("Preencha o número de WhatsApp.");
+        errors.push("• Preencha o número de WhatsApp.");
       } else if (phoneDigits.length < 10) {
-        errors.push("O WhatsApp deve conter apenas números (mínimo 10 dígitos).");
+        errors.push("• O número de WhatsApp deve ter no mínimo 10 dígitos.");
       }
       if (service === "Serviços personalizados" && !customService) {
-        errors.push("Descreva o serviço personalizado.");
+        errors.push("• Descreva o serviço personalizado.");
       }
 
       if (errors.length > 0) {
-        alert(errors.join("\n"));
         return;
       }
 

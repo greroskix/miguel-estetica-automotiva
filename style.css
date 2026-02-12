@@ -291,15 +291,27 @@ button {
 
 .btn--agendar,
 .booking-step__actions .btn--agendar {
-  background: #2196f3;
-  color: #fff;
   padding: 0.875rem 2rem;
   font-weight: 600;
   border: none;
 }
 
-.btn--agendar:hover,
-.booking-step__actions .btn--agendar:hover {
+/* Cinza quando faltam campos; azul quando tudo preenchido (botão sempre clicável para mostrar aviso) */
+.btn--agendar.btn--agendar--invalid,
+.booking-step__actions .btn--agendar.btn--agendar--invalid {
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+}
+
+.btn--agendar:not(.btn--agendar--invalid),
+.booking-step__actions .btn--agendar:not(.btn--agendar--invalid) {
+  background: #2196f3;
+  color: #fff;
+}
+
+.btn--agendar:hover:not(.btn--agendar--invalid),
+.booking-step__actions .btn--agendar:hover:not(.btn--agendar--invalid) {
   background: #1976d2;
   color: #fff;
 }
@@ -2262,6 +2274,25 @@ button {
 
 .booking-step__actions .btn {
   min-width: 140px;
+}
+
+/* Continuar: azul só quando um serviço estiver selecionado (botão habilitado) */
+.booking-step__next:disabled {
+  background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: not-allowed;
+}
+
+.booking-step__next:not(:disabled) {
+  background: linear-gradient(135deg, #2196f3 0%, #00bcd4 100%);
+  color: #ffffff;
+  border-color: #2196f3;
+  box-shadow: 0 4px 14px rgba(33, 150, 243, 0.35);
+}
+
+.booking-step__next:not(:disabled):hover {
+  background: linear-gradient(135deg, #1976d2 0%, #0097a7 100%);
+  box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
 }
 
 /* Confirmação */
