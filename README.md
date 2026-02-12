@@ -36,8 +36,7 @@ Sem frameworks, sem build — só arquivos estáticos.
 ```
 ├── index.html      → Página principal
 ├── style.css       → Estilos
-├── main.js         → Lógica e Calendly
-├── CALENDLY_SETUP.md → Como configurar o Calendly
+├── main.js         → Lógica e integração com Calendly
 └── assets/         → Imagens, favicon, etc.
 ```
 
@@ -47,4 +46,4 @@ Sem frameworks, sem build — só arquivos estáticos.
 
 Abra o `index.html` no navegador ou use um servidor local (ex.: `npx serve .` ou `python -m http.server 8000`).
 
-Para alterar o link do Calendly, edite a constante `CALENDLY_BASE_URL` no `main.js` e confira o **CALENDLY_SETUP.md** para as perguntas no Calendly.
+Para alterar o link do Calendly, edite a constante `CALENDLY_BASE_URL` no `main.js`.
