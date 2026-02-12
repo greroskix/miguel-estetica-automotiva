@@ -305,6 +305,7 @@
           <p class="section__subtitle">
             Escolha o serviço que deseja e preencha seus dados. Entraremos em contato em breve!
           </p>
+          <p class="section__note">Qualquer dúvida, fale conosco: <a href="https://wa.me/5511943219718" target="_blank" rel="noopener noreferrer">(11) 94321-9718</a></p>
           <button type="button" class="btn btn--primary btn--large btn--booking-cta" id="open-booking-modal">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 14px;">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -511,9 +512,15 @@
                     <input type="tel" id="booking-phone" placeholder="(00) 00000-0000" required />
                   </div>
                 </div>
-                <div class="booking-form__field">
-                  <label for="booking-car">Veículo</label>
-                  <input type="text" id="booking-car" placeholder="Modelo e ano do veículo" required />
+                <div class="booking-form__row">
+                  <div class="booking-form__field">
+                    <label for="booking-car">Veículo</label>
+                    <input type="text" id="booking-car" placeholder="Modelo e ano do veículo" required />
+                  </div>
+                  <div class="booking-form__field">
+                    <label for="booking-email">E-mail (opcional)</label>
+                    <input type="email" id="booking-email" placeholder="seu@email.com" />
+                  </div>
                 </div>
                 <div class="booking-form__field" id="booking-custom-service-field" style="display: none;">
                   <label for="booking-custom-service">Descreva o serviço personalizado</label>
@@ -538,8 +545,9 @@
                     <path d="M8 12l2 2 4-4" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
                 </div>
-                <h2 class="booking-confirmation__title">Agendamento enviado!</h2>
-                <p class="booking-confirmation__message">Sua solicitação foi enviada com sucesso. Entraremos em contato em breve!</p>
+                <h2 class="booking-confirmation__title">Escolha o horário</h2>
+                <p class="booking-confirmation__message">Uma nova aba foi aberta com o Calendly. Escolha o dia e o horário que preferir. Você receberá a confirmação por e-mail e no celular.</p>
+                <p class="booking-confirmation__contact">Qualquer dúvida, fale conosco: <a href="https://wa.me/5511943219718" target="_blank" rel="noopener noreferrer">(11) 94321-9718</a></p>
                 <button type="button" class="btn btn--primary booking-confirmation__close">Fechar</button>
               </div>
             </div>

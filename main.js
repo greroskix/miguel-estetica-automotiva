@@ -439,6 +439,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingCustomField = document.getElementById("booking-custom-service-field");
   const bookingCustomTextarea = document.getElementById("booking-custom-service");
 
+  // Link do seu evento no Calendly (troque pelo seu link real)
+  const CALENDLY_BASE_URL = "https://calendly.com/miguelesteticautomotiva/agendamentos-estetica-automotiva";
+
   let currentBookingStep = 1;
   let selectedBookingService = null;
 
@@ -601,12 +604,15 @@ document.addEventListener("DOMContentLoaded", () => {
       const nameEl = document.getElementById("booking-name");
       const phoneEl = document.getElementById("booking-phone");
       const carEl = document.getElementById("booking-car");
+      const emailEl = document.getElementById("booking-email");
 
       const name = (nameEl?.value || "").trim();
       const phoneRaw = (phoneEl?.value || "").trim();
       const car = (carEl?.value || "").trim();
+      const email = (emailEl?.value || "").trim();
       const service = bookingServiceInput?.value || "";
       const customService = (bookingCustomTextarea?.value || "").trim();
+      const message = (document.getElementById("booking-message")?.value || "").trim();
 
       const phoneDigits = phoneRaw.replace(/\D/g, "");
       const errors = [];
@@ -626,6 +632,19 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(errors.join("\n"));
         return;
       }
+
+      const serviceText = service === "Serviços personalizados" && customService
+        ? `Serviços personalizados: ${customService}`
+        : service;
+      const params = new URLSearchParams();
+      params.set("name", name);
+      if (email) params.set("email", email);
+      params.set("a1", phoneRaw);
+      params.set("a2", car);
+      params.set("a3", serviceText || "");
+      params.set("a4", message);
+      const calendlyUrl = `${CALENDLY_BASE_URL}?${params.toString()}`;
+      window.open(calendlyUrl, "_blank");
 
       goToBookingStep(3);
     });
