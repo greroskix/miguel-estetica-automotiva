@@ -47,22 +47,12 @@ Tudo em uma página única, responsiva e com animações leves. Sem frameworks �
 
 ## 🛠️ Stack tecnológica
 
-| Tecnologia | Função |
-|:--- |:--- |
-| **HTML5** | Estrutura da página, seções, formulário e modais |
-| **CSS3** | Layout, cores, responsividade, animações e efeitos visuais |
-| **JavaScript** | Menu mobile, scroll suave, modais, validação do formulário e integração com Calendly |
-| **Calendly** | Agendamento online: o formulário preenche os dados no Calendly; o cliente só escolhe o horário |
-
-| Categoria | Tecnologias |
-|:--- |:--- |
-| **Frontend** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) |
-| **Ferramentas** | ![Calendly](https://img.shields.io/badge/Calendly-006BFF?style=flat-square&logo=calendly&logoColor=white) |
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) ![Calendly](https://img.shields.io/badge/Calendly-006BFF?style=flat-square&logo=calendly&logoColor=white) ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=flat-square&logo=visual-studio-code&logoColor=white)
 
 ---
 
 <div align="center">
 
-*Feito por [@greroskix](https://github.com/greroskix)*
+**André Aparecido Alves Zanatta Greroski** *Técnico em Desenvolvimento de Sistemas*
 
 </div>
