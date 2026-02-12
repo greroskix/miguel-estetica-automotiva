@@ -98,18 +98,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  const formatStat = (val, suffix) => suffix === "+" ? `+${val}` : suffix === "%" ? `${val}%` : suffix === ".0" ? (typeof val === "number" ? val.toFixed(1) : val) : val;
   const animateCounter = (element, target, suffix = "", duration = 2000) => {
     let start = 0;
-    const increment = target / (duration / 16);
+    const inc = target / (duration / 16);
     const timer = setInterval(() => {
-      start += increment;
-      if (start >= target) {
-        element.textContent = suffix === "+" ? `+${target}` : suffix === "%" ? `${target}%` : suffix === ".0" ? `${target.toFixed(1)}` : target;
-        clearInterval(timer);
-      } else {
-        const value = Math.floor(start);
-        element.textContent = suffix === "+" ? `+${value}` : suffix === "%" ? `${value}%` : suffix === ".0" ? value.toFixed(1) : value;
-      }
+      start += inc;
+      element.textContent = formatStat(start >= target ? target : Math.floor(start), suffix);
+      if (start >= target) clearInterval(timer);
     }, 16);
   };
 
@@ -159,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastScroll = 0;
   let scrollTicking = false;
   const header = document.querySelector(".topbar");
-  
   if (header) {
     window.addEventListener("scroll", () => {
       if (!scrollTicking) {
@@ -191,37 +186,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }, { passive: true });
   }
-
-
-  const createRipple = (event) => {
-    const button = event.currentTarget;
-    const circle = document.createElement("span");
-    const diameter = Math.max(button.clientWidth, button.clientHeight);
-    const radius = diameter / 2;
-
-    circle.style.cssText = `
-      position: absolute;
-      width: ${diameter}px;
-      height: ${diameter}px;
-      left: ${event.clientX - button.getBoundingClientRect().left - radius}px;
-      top: ${event.clientY - button.getBoundingClientRect().top - radius}px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.6);
-      transform: scale(0);
-      animation: ripple-animation 0.6s ease-out;
-      pointer-events: none;
-    `;
-    circle.classList.add("ripple");
-
-    const existingRipple = button.querySelector(".ripple");
-    if (existingRipple) existingRipple.remove();
-
-    button.appendChild(circle);
-  };
-
-  document.querySelectorAll(".btn").forEach((button) => {
-    button.addEventListener("click", createRipple);
-  });
 
   const serviceModal = document.getElementById("service-modal");
   const serviceModalContent = document.getElementById("service-modal-content");
@@ -431,12 +395,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && serviceModal && serviceModal.classList.contains("active")) {
-      closeServiceModal();
-    }
-    if (e.key === "Escape" && bookingModal && bookingModal.classList.contains("active")) {
-      closeBookingModal();
-    }
+    if (e.key !== "Escape") return;
+    if (serviceModal?.classList.contains("active")) closeServiceModal();
+    else if (bookingModal?.classList.contains("active")) closeBookingModal();
   });
 
   const bookingModal = document.getElementById("booking-modal");
@@ -459,8 +420,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingSelectedCustomPrice = document.getElementById("booking-selected-custom-price");
   const bookingCustomField = document.getElementById("booking-custom-service-field");
   const bookingCustomTextarea = document.getElementById("booking-custom-service");
-
-  // Link do seu evento no Calendly (troque pelo seu link real)
   const CALENDLY_BASE_URL = "https://calendly.com/miguelesteticautomotiva/agendamentos-estetica-automotiva";
 
   let currentBookingStep = 1;
@@ -489,18 +448,16 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const resetBookingForm = () => {
-    bookingSteps.forEach((step, index) => {
-      if (index === 0) {
-        step.classList.add("booking-step--active");
-      } else {
-        step.classList.remove("booking-step--active");
-      }
+    bookingSteps.forEach((step, i) => {
+      step.classList.toggle("booking-step--active", i === 0);
     });
-    bookingServiceCards.forEach(card => card.classList.remove("selected"));
-    bookingNextBtn.disabled = true;
-    bookingNextBtn.style.opacity = "0.5";
+    bookingServiceCards.forEach(c => c.classList.remove("selected"));
+    if (bookingNextBtn) {
+      bookingNextBtn.disabled = true;
+      bookingNextBtn.style.opacity = "0.5";
+    }
     selectedBookingService = null;
-    if (bookingForm) bookingForm.reset();
+    bookingForm?.reset();
   };
 
   const updateBookingProgress = () => {
@@ -517,13 +474,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const goToBookingStep = (step) => {
-    bookingSteps.forEach((s, index) => {
-      if (index + 1 === step) {
-        s.classList.add("booking-step--active");
-      } else {
-        s.classList.remove("booking-step--active");
-      }
-    });
+    bookingSteps.forEach((s, i) => s.classList.toggle("booking-step--active", i + 1 === step));
     currentBookingStep = step;
     updateBookingProgress();
   };

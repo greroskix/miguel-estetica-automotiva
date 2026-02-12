@@ -212,6 +212,11 @@ button {
   margin-right: 14px;
 }
 
+.btn--instagram-header svg,
+.btn--whatsapp-header svg {
+  margin-right: 6px;
+}
+
 .btn--instagram-header {
   padding: 0.65rem 1.6rem;
   font-size: 0.875rem;
@@ -284,27 +289,19 @@ button {
   transform: translateY(-1px);
 }
 
-.btn--agendar {
+.btn--agendar,
+.booking-step__actions .btn--agendar {
   background: #2196f3;
-  color: #ffffff;
+  color: #fff;
   padding: 0.875rem 2rem;
   font-weight: 600;
   border: none;
 }
 
-.btn--agendar:hover {
-  background: #1976d2;
-  color: #ffffff;
-}
-
-.booking-step__actions .btn--agendar {
-  background: #2196f3;
-  color: #ffffff;
-}
-
+.btn--agendar:hover,
 .booking-step__actions .btn--agendar:hover {
   background: #1976d2;
-  color: #ffffff;
+  color: #fff;
 }
 
 /* Menu mobile */
@@ -1490,13 +1487,6 @@ button {
   50% {
     opacity: 1;
     transform: scale(1.05);
-  }
-}
-
-@keyframes ripple-animation {
-  to {
-    transform: scale(4);
-    opacity: 0;
   }
 }
 
