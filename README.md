@@ -39,11 +39,3 @@ Sem frameworks, sem build — só arquivos estáticos.
 ├── main.js         → Lógica e integração com Calendly
 └── assets/         → Imagens, favicon, etc.
 ```
-
----
-
-## 🚀 Como ver rodando
-
-Abra o `index.html` no navegador ou use um servidor local (ex.: `npx serve .` ou `python -m http.server 8000`).
-
-Para alterar o link do Calendly, edite a constante `CALENDLY_BASE_URL` no `main.js`.
