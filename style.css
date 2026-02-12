@@ -702,10 +702,18 @@ button {
   text-align: center;
 }
 
+.section__note strong {
+  font-weight: 700;
+  color: #e0e0e0;
+}
+
 .section__note a {
+  display: block;
+  margin-top: 0.35rem;
   color: #2196f3;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .section__note a:hover {
@@ -906,14 +914,14 @@ button {
 
 .service-modal__close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  width: 40px;
-  height: 40px;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.1);
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #333;
   cursor: pointer;
   display: flex;
@@ -1077,11 +1085,11 @@ button {
   }
 
   .service-modal__close {
-    width: 48px;
-    height: 48px;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.75rem;
+    width: 36px;
+    height: 36px;
+    top: 0.75rem;
+    right: 0.75rem;
+    font-size: 1.25rem;
   }
 
   .service-modal__title {
@@ -1924,11 +1932,13 @@ button {
   max-width: 800px;
   width: 100%;
   max-height: 90vh;
+  overflow-x: hidden;
   overflow-y: auto;
   box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
   transform: scale(0.95);
   transition: transform 0.3s ease;
   z-index: 1;
+  min-width: 0;
 }
 
 .booking-modal.active .booking-modal__container {
@@ -2294,9 +2304,11 @@ button {
 }
 
 .booking-confirmation__icon {
-  margin-bottom: 1.5rem;
+  margin: 0 auto 1.5rem;
   display: flex;
   justify-content: center;
+  align-items: center;
+  width: fit-content;
 }
 
 .booking-confirmation__title {
@@ -2319,10 +2331,18 @@ button {
   margin-bottom: 2rem;
 }
 
+.booking-confirmation__contact strong {
+  font-weight: 700;
+  color: #333;
+}
+
 .booking-confirmation__contact a {
+  display: block;
+  margin-top: 0.35rem;
   color: #25D366;
   font-weight: 600;
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .booking-confirmation__contact a:hover {
@@ -2352,6 +2372,13 @@ button {
     width: 100%;
     max-height: 90dvh;
     border-radius: 24px;
+    overflow-x: hidden;
+    min-width: 0;
+  }
+
+  .booking-modal__content {
+    min-width: 0;
+    overflow-x: hidden;
   }
 
   .booking-modal__close {
@@ -2377,7 +2404,20 @@ button {
   }
 
   .booking-modal__content {
-    padding: 1.5rem 1.5rem 2rem;
+    padding: 1.25rem 1rem 1.5rem;
+    box-sizing: border-box;
+  }
+
+  .booking-progress {
+    max-width: min(300px, 100%);
+  }
+
+  .booking-form__fields,
+  .booking-selected-service,
+  .booking-form__field input,
+  .booking-form__field textarea {
+    max-width: 100%;
+    box-sizing: border-box;
   }
 
   .booking-progress__step-label {
