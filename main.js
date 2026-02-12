@@ -400,15 +400,13 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (bookingModal?.classList.contains("active")) closeBookingModal();
   });
 
-  /* Carrossel de serviços: apenas no mobile – troca a cada 3s + swipe com o dedo */
   (function initServicesCarousel() {
     const carousel = document.querySelector(".services-carousel");
     const track = document.querySelector(".services-carousel__track");
     const dotsContainer = document.querySelector(".services-carousel__dots");
     if (!carousel || !track || !dotsContainer) return;
 
-    const cards = track.querySelectorAll(".service-card");
-    const total = cards.length;
+    const total = track.querySelectorAll(".service-card").length;
     if (total === 0) return;
 
     const MOBILE_BREAKPOINT = 720;
@@ -591,6 +589,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingNameEl = document.getElementById("booking-name");
   const bookingPhoneEl = document.getElementById("booking-phone");
   const bookingCarEl = document.getElementById("booking-car");
+  const bookingEmailEl = document.getElementById("booking-email");
+  const bookingMessageEl = document.getElementById("booking-message");
 
   function isBookingStep2Valid() {
     const name = (bookingNameEl?.value || "").trim();
@@ -713,37 +713,17 @@ document.addEventListener("DOMContentLoaded", () => {
   if (bookingForm) {
     bookingForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
-      const nameEl = document.getElementById("booking-name");
-      const phoneEl = document.getElementById("booking-phone");
-      const carEl = document.getElementById("booking-car");
-      const emailEl = document.getElementById("booking-email");
-
-      const name = (nameEl?.value || "").trim();
-      const phoneRaw = (phoneEl?.value || "").trim();
-      const car = (carEl?.value || "").trim();
-      const email = (emailEl?.value || "").trim();
+      const name = (bookingNameEl?.value || "").trim();
+      const phoneRaw = (bookingPhoneEl?.value || "").trim();
+      const car = (bookingCarEl?.value || "").trim();
+      const email = (bookingEmailEl?.value || "").trim();
       const service = bookingServiceInput?.value || "";
       const customService = (bookingCustomTextarea?.value || "").trim();
-      const message = (document.getElementById("booking-message")?.value || "").trim();
+      const message = (bookingMessageEl?.value || "").trim();
 
       const phoneDigits = phoneRaw.replace(/\D/g, "");
-      const errors = [];
-
-      if (!name) errors.push("• Preencha o nome completo.");
-      if (!car) errors.push("• Preencha o modelo e ano do veículo.");
-      if (!phoneRaw) {
-        errors.push("• Preencha o número de WhatsApp.");
-      } else if (phoneDigits.length < 10) {
-        errors.push("• O número de WhatsApp deve ter no mínimo 10 dígitos.");
-      }
-      if (service === "Serviços personalizados" && !customService) {
-        errors.push("• Descreva o serviço personalizado.");
-      }
-
-      if (errors.length > 0) {
-        return;
-      }
+      if (!name || !car || phoneDigits.length < 10) return;
+      if (service === "Serviços personalizados" && !customService) return;
 
       const serviceText = service === "Serviços personalizados" && customService
         ? `Serviços personalizados: ${customService}`
