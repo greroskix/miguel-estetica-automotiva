@@ -2,8 +2,8 @@
 
 # 🚗 Miguel Estética Automotiva
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andregreroski/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/greroskix/miguel-estetica-automotiva)
-[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://greroskix.github.io/miguel-estetica-automotiva/)
 
 *Landing page institucional da Miguel Estética Automotiva — serviços, depoimentos e agendamento online integrado ao Calendly.*
 
