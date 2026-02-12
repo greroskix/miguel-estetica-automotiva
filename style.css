@@ -2093,3 +2093,523 @@ button {
     display: none;
   }
 }
+
+/* Seção de Agendamento */
+.btn--booking-cta {
+  padding: 1.5rem 4rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2196f3 0%, #00bcd4 50%, #7c4dff 100%);
+  background-size: 200% 200%;
+  color: #ffffff;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(33, 150, 243, 0.4), 
+              0 0 0 0 rgba(33, 150, 243, 0.4),
+              0 0 60px rgba(124, 77, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.btn--booking-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn--booking-cta:hover::before {
+  left: 100%;
+}
+
+.btn--booking-cta:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 16px 50px rgba(33, 150, 243, 0.5), 
+              0 0 0 4px rgba(33, 150, 243, 0.2),
+              0 0 80px rgba(124, 77, 255, 0.4);
+  background-position: right center;
+}
+
+.btn--booking-cta:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .btn--booking-cta {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.15rem;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+  }
+}
+
+/* Modal de Agendamento */
+.booking-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.booking-modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+.booking-modal__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  backdrop-filter: blur(10px);
+}
+
+.booking-modal__container {
+  position: relative;
+  background: #ffffff;
+  border-radius: 24px;
+  max-width: 800px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.6);
+  transform: scale(0.95);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.booking-modal.active .booking-modal__container {
+  transform: scale(1);
+}
+
+.booking-modal__close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  color: #333;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.booking-modal__close:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: rotate(90deg);
+}
+
+.booking-modal__content {
+  padding: 3rem 2.5rem 2.5rem;
+}
+
+/* Indicador de Progresso */
+.booking-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 2.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.booking-progress__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+  position: relative;
+}
+
+.booking-progress__step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.booking-progress__step--active .booking-progress__step-number {
+  background: #2196f3;
+  color: #ffffff;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.2);
+}
+
+.booking-progress__step--completed .booking-progress__step-number {
+  background: #25D366;
+  color: #ffffff;
+  border-color: #25D366;
+}
+
+.booking-progress__step--completed .booking-progress__step-number::before {
+  content: "✓";
+  font-size: 1.2rem;
+}
+
+.booking-progress__step-label {
+  font-size: 0.85rem;
+  color: #999;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.booking-progress__step--active .booking-progress__step-label {
+  color: #2196f3;
+  font-weight: 600;
+}
+
+.booking-progress__line {
+  flex: 1;
+  height: 2px;
+  background: #e0e0e0;
+  margin: 0 1rem;
+  margin-top: -20px;
+  transition: background 0.3s ease;
+}
+
+.booking-progress__step--completed ~ .booking-progress__line,
+.booking-progress__step--active ~ .booking-progress__line {
+  background: #2196f3;
+}
+
+/* Steps do Formulário */
+.booking-step {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.booking-step--active {
+  display: block;
+}
+
+.booking-step__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.booking-step__subtitle {
+  font-size: 1rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Grid de Serviços */
+.booking-services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.booking-service-card {
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-service-card:hover {
+  border-color: #2196f3;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(33, 150, 243, 0.2);
+}
+
+.booking-service-card.selected {
+  border-color: #2196f3;
+  background: rgba(33, 150, 243, 0.05);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.booking-service-card__image {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+  background: #e0e0e0;
+}
+
+.booking-service-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.booking-service-card:hover .booking-service-card__image img {
+  transform: scale(1.1);
+}
+
+.booking-service-card__icon {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2196f3 0%, #00bcd4 100%);
+  color: white;
+}
+
+.booking-service-card__content {
+  padding: 1rem;
+  text-align: center;
+}
+
+.booking-service-card__content h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.booking-service-card__price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2196f3;
+}
+
+/* Serviço Selecionado Preview */
+.booking-selected-service {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 2px solid #e0e0e0;
+}
+
+.booking-selected-service__image {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.booking-selected-service__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.booking-selected-service__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2196f3 0%, #00bcd4 100%);
+  color: white;
+  flex-shrink: 0;
+}
+
+.booking-selected-service__info {
+  flex: 1;
+}
+
+.booking-selected-service__info h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.booking-selected-service__info span {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2196f3;
+}
+
+/* Campos do Formulário */
+.booking-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.booking-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.booking-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.booking-form__field label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.booking-form__field input,
+.booking-form__field textarea {
+  padding: 0.875rem 1rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+.booking-form__field input:focus,
+.booking-form__field textarea:focus {
+  outline: none;
+  border-color: #2196f3;
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+.booking-form__field textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Ações dos Steps */
+.booking-step__actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: flex-end;
+}
+
+.booking-step__actions .btn {
+  min-width: 140px;
+}
+
+/* Confirmação */
+.booking-confirmation {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.booking-confirmation__icon {
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.booking-confirmation__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.booking-confirmation__message {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.booking-confirmation__close {
+  min-width: 200px;
+}
+
+/* Botão Grande no Hero */
+.btn--large {
+  padding: 1rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .booking-modal__container {
+    max-width: 95%;
+    border-radius: 16px;
+  }
+
+  .booking-modal__content {
+    padding: 2rem 1.5rem;
+  }
+
+  .booking-progress {
+    padding: 1.5rem 1rem 0;
+  }
+
+  .booking-progress__step-label {
+    font-size: 0.75rem;
+  }
+
+  .booking-progress__step-number {
+    width: 36px;
+    height: 36px;
+    font-size: 0.85rem;
+  }
+
+  .booking-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .booking-form__row {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-step__actions {
+    flex-direction: column;
+  }
+
+  .booking-step__actions .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .booking-services-grid {
+    grid-template-columns: 1fr;
+  }
+}

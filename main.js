@@ -192,150 +192,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }, { passive: true });
   }
 
-  const form = document.getElementById("booking-form");
-  if (form) {
-    const serviceCards = document.querySelectorAll(".service-selection__card");
-    const serviceInput = document.getElementById("service");
-    const nextBtn = document.querySelector(".form__next-btn");
-    const backBtn = document.querySelector(".form__back-btn");
-    const step1 = document.querySelector('[data-step="1"]');
-    const step2 = document.querySelector('[data-step="2"]');
-    const selectedServicePreview = document.getElementById("selected-service-preview");
-    const selectedServiceCustom = document.getElementById("selected-service-custom");
-    const selectedServiceImg = document.getElementById("selected-service-img");
-    const selectedServiceName = document.getElementById("selected-service-name");
-    const selectedServicePrice = document.getElementById("selected-service-price");
-    const selectedServiceCustomName = document.getElementById("selected-service-custom-name");
-    const selectedServiceCustomPrice = document.getElementById("selected-service-custom-price");
-    const customServiceField = document.getElementById("custom-service-field");
-    const customServiceTextarea = document.getElementById("custom-service");
-
-    let selectedService = null;
-
-    serviceCards.forEach((card) => {
-      card.addEventListener("click", function () {
-        serviceCards.forEach((c) => c.classList.remove("selected"));
-        this.classList.add("selected");
-        
-        const service = this.getAttribute("data-service");
-        const image = this.getAttribute("data-image");
-        const price = this.getAttribute("data-price");
-        
-        selectedService = service;
-        serviceInput.value = service;
-        nextBtn.disabled = false;
-        nextBtn.style.opacity = "1";
-        nextBtn.style.cursor = "pointer";
-
-        if (service === "personalizado" || service === "Serviços personalizados") {
-          selectedServicePreview.style.display = "none";
-          selectedServiceCustom.style.display = "flex";
-          selectedServiceCustomName.textContent = service === "Serviços personalizados" ? "Serviços personalizados" : "Serviço personalizado";
-          selectedServiceCustomPrice.textContent = price || "Sob consulta";
-        } else {
-          selectedServicePreview.style.display = "flex";
-          selectedServiceCustom.style.display = "none";
-          if (image) {
-            selectedServiceImg.src = image;
-            selectedServiceImg.alt = service;
-          }
-          selectedServiceName.textContent = service;
-          selectedServicePrice.textContent = `A partir de ${price}`;
-        }
-      });
-    });
-
-    nextBtn.addEventListener("click", function () {
-      if (selectedService) {
-        step1.classList.remove("form__step--active");
-        step2.classList.add("form__step--active");
-        
-        if (selectedService === "personalizado" || selectedService === "Serviços personalizados") {
-          customServiceField.style.display = "flex";
-          customServiceTextarea.required = true;
-          setTimeout(() => {
-            customServiceTextarea.focus();
-          }, 300);
-        } else {
-          customServiceField.style.display = "none";
-          customServiceTextarea.required = false;
-        }
-      }
-    });
-
-    backBtn.addEventListener("click", function () {
-      step2.classList.remove("form__step--active");
-      step1.classList.add("form__step--active");
-    });
-
-    const formFields = form.querySelectorAll("input, textarea");
-    
-    formFields.forEach((field) => {
-      field.addEventListener("input", function () {
-        if (this.value.length > 0) {
-          this.style.borderColor = "rgba(33, 150, 243, 0.5)";
-          this.parentElement.querySelector("label")?.style.setProperty("color", "#2196f3");
-        } else {
-          this.style.borderColor = "";
-          this.parentElement.querySelector("label")?.style.setProperty("color", "#b5b5b5");
-        }
-      });
-    });
-
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalText = submitBtn.innerHTML;
-      
-      submitBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px; animation: spin 1s linear infinite;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg> Enviando...';
-      submitBtn.style.opacity = "0.7";
-      submitBtn.disabled = true;
-
-      setTimeout(() => {
-        submitBtn.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg> Enviado!';
-        submitBtn.style.background = "linear-gradient(135deg, #25D366 0%, #20BA5A 100%)";
-        
-        setTimeout(() => {
-          const phone = document.getElementById("phone")?.value || "";
-          const name = document.getElementById("name")?.value || "";
-          const car = document.getElementById("car")?.value || "";
-          const service = document.getElementById("service")?.value || "";
-          const customService = document.getElementById("custom-service")?.value || "";
-          const message = document.getElementById("message")?.value || "";
-          
-          let serviceText = service;
-          if ((service === "personalizado" || service === "Serviços personalizados") && customService) {
-            serviceText = `Serviços personalizados: ${customService}`;
-          }
-          
-          const whatsappMessage = `Olá! Meu nome é ${name}. Tenho interesse em ${serviceText || "um serviço"} para meu veículo: ${car}. ${message ? `Mensagem: ${message}` : ""}`;
-          window.open(`https://wa.me/5511943219718?text=${encodeURIComponent(whatsappMessage)}`, "_blank");
-          
-          submitBtn.innerHTML = originalText;
-          submitBtn.style.background = "";
-          submitBtn.style.opacity = "1";
-          submitBtn.disabled = false;
-          form.reset();
-          
-          if (step1 && step2) {
-            step2.classList.remove("form__step--active");
-            step1.classList.add("form__step--active");
-            serviceCards.forEach((c) => c.classList.remove("selected"));
-            if (nextBtn) {
-              nextBtn.disabled = true;
-              nextBtn.style.opacity = "0.5";
-            }
-            if (selectedServicePreview) {
-              selectedServicePreview.style.display = "none";
-            }
-            if (selectedServiceCustom) {
-              selectedServiceCustom.style.display = "none";
-            }
-          }
-        }, 1500);
-      }, 1000);
-    });
-  }
 
   if (!document.getElementById("ripple-styles")) {
     const rippleStyle = document.createElement("style");
@@ -408,8 +264,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Tratamento especializado"
       ],
       images: [
-        "assets/img/carros-exposicao/carro2.jpeg",
-        "assets/img/carros-exposicao/carro3.jpeg"
+        "assets/img/lavagem-tradicional-parabrisa/molde1.jpeg",
+        "assets/img/lavagem-tradicional-parabrisa/molde2.gif"
       ]
     },
     "lavagem-motor": {
@@ -425,8 +281,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Produtos de qualidade"
       ],
       images: [
-        "assets/img/carros-exposicao/carro1.jpeg",
-        "assets/img/carros-exposicao/carro2.jpeg"
+        "assets/img/lavagem-tradicional-motor/molde1.png",
+        "assets/img/lavagem-tradicional-motor/molde2.jpeg"
       ]
     },
     "lavagem-detalhada": {
@@ -441,8 +297,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Acabamento impecável"
       ],
       images: [
-        "assets/img/carros-exposicao/carro3.jpeg",
-        "assets/img/carros-exposicao/carro4.jpeg"
+        "assets/img/lavagem-detalhada/molde1.jpg",
+        "assets/img/lavagem-detalhada/molde2.jpg"
       ]
     },
     higienizacao: {
@@ -512,7 +368,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </ul>
       
       <div class="service-modal__cta">
-        <a href="#agendar" class="btn btn--primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Agendar serviço</a>
+        <a href="#agendar" class="btn btn--primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = ''; setTimeout(() => { if (window.openBookingModal) window.openBookingModal(); else document.getElementById('open-booking-modal')?.click(); }, 300);">Agendar serviço</a>
         <a href="https://wa.me/5511943219718?text=${encodeURIComponent('Quero saber mais sobre ' + service.title.toLowerCase())}" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp-primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Falar no WhatsApp</a>
       </div>
     `;
@@ -564,5 +420,216 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape" && serviceModal && serviceModal.classList.contains("active")) {
       closeServiceModal();
     }
+    if (e.key === "Escape" && bookingModal && bookingModal.classList.contains("active")) {
+      closeBookingModal();
+    }
   });
+
+  // Modal de Agendamento
+  const bookingModal = document.getElementById("booking-modal");
+  const openBookingBtn = document.getElementById("open-booking-modal");
+  const closeBookingBtn = document.querySelector(".booking-modal__close");
+  const bookingForm = document.getElementById("booking-modal-form");
+  const bookingSteps = document.querySelectorAll(".booking-step");
+  const progressSteps = document.querySelectorAll(".booking-progress__step");
+  const bookingServiceCards = document.querySelectorAll(".booking-service-card");
+  const bookingServiceInput = document.getElementById("booking-service");
+  const bookingNextBtn = document.querySelector(".booking-step__next");
+  const bookingBackBtn = document.querySelector(".booking-step__back");
+  const bookingSelectedPreview = document.getElementById("booking-selected-service-preview");
+  const bookingSelectedCustom = document.getElementById("booking-selected-service-custom");
+  const bookingSelectedImg = document.getElementById("booking-selected-img");
+  const bookingSelectedName = document.getElementById("booking-selected-name");
+  const bookingSelectedPrice = document.getElementById("booking-selected-price");
+  const bookingSelectedCustomName = document.getElementById("booking-selected-custom-name");
+  const bookingSelectedCustomPrice = document.getElementById("booking-selected-custom-price");
+  const bookingCustomField = document.getElementById("booking-custom-service-field");
+  const bookingCustomTextarea = document.getElementById("booking-custom-service");
+
+  let currentBookingStep = 1;
+  let selectedBookingService = null;
+  let selectedBookingServiceData = null;
+
+  const openBookingModal = () => {
+    if (bookingModal) {
+      bookingModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+      currentBookingStep = 1;
+      updateBookingProgress();
+      resetBookingForm();
+    }
+  };
+
+  // Tornar a função global para uso em onclick
+  window.openBookingModal = openBookingModal;
+
+  const closeBookingModal = () => {
+    bookingModal.classList.remove("active");
+    document.body.style.overflow = "";
+    setTimeout(() => {
+      currentBookingStep = 1;
+      updateBookingProgress();
+      resetBookingForm();
+    }, 300);
+  };
+
+  const resetBookingForm = () => {
+    bookingSteps.forEach((step, index) => {
+      if (index === 0) {
+        step.classList.add("booking-step--active");
+      } else {
+        step.classList.remove("booking-step--active");
+      }
+    });
+    bookingServiceCards.forEach(card => card.classList.remove("selected"));
+    bookingNextBtn.disabled = true;
+    bookingNextBtn.style.opacity = "0.5";
+    selectedBookingService = null;
+    selectedBookingServiceData = null;
+    if (bookingForm) bookingForm.reset();
+  };
+
+  const updateBookingProgress = () => {
+    progressSteps.forEach((step, index) => {
+      const stepNum = index + 1;
+      step.classList.remove("booking-progress__step--active", "booking-progress__step--completed");
+      
+      if (stepNum < currentBookingStep) {
+        step.classList.add("booking-progress__step--completed");
+      } else if (stepNum === currentBookingStep) {
+        step.classList.add("booking-progress__step--active");
+      }
+    });
+  };
+
+  const goToBookingStep = (step) => {
+    bookingSteps.forEach((s, index) => {
+      if (index + 1 === step) {
+        s.classList.add("booking-step--active");
+      } else {
+        s.classList.remove("booking-step--active");
+      }
+    });
+    currentBookingStep = step;
+    updateBookingProgress();
+  };
+
+  if (openBookingBtn) {
+    openBookingBtn.addEventListener("click", openBookingModal);
+  }
+
+  // Links do menu que fazem scroll para a seção de agendamento
+  const navAgendarLink = document.getElementById("nav-agendar-link");
+  const navMobileAgendarLink = document.getElementById("nav-mobile-agendar-link");
+  
+  // O scroll suave já é gerenciado pelo código de links com href="#"
+  // Apenas fechar o menu mobile se estiver aberto
+  if (navMobileAgendarLink) {
+    navMobileAgendarLink.addEventListener("click", () => {
+      // Fechar menu mobile se estiver aberto
+      if (navMobile && navMobile.classList.contains("active")) {
+        toggleMenu(false);
+      }
+    });
+  }
+
+  if (closeBookingBtn) {
+    closeBookingBtn.addEventListener("click", closeBookingModal);
+  }
+
+  if (bookingModal) {
+    bookingModal.addEventListener("click", (e) => {
+      if (e.target === bookingModal || e.target.classList.contains("booking-modal__overlay")) {
+        closeBookingModal();
+      }
+    });
+  }
+
+  // Seleção de serviços
+  bookingServiceCards.forEach((card) => {
+    card.addEventListener("click", function () {
+      bookingServiceCards.forEach((c) => c.classList.remove("selected"));
+      this.classList.add("selected");
+      
+      const service = this.getAttribute("data-service");
+      const image = this.getAttribute("data-image");
+      const price = this.getAttribute("data-price");
+      
+      selectedBookingService = service;
+      selectedBookingServiceData = { service, image, price };
+      bookingServiceInput.value = service;
+      bookingNextBtn.disabled = false;
+      bookingNextBtn.style.opacity = "1";
+      bookingNextBtn.style.cursor = "pointer";
+
+      if (service === "Serviços personalizados") {
+        bookingSelectedPreview.style.display = "none";
+        bookingSelectedCustom.style.display = "flex";
+        bookingSelectedCustomName.textContent = "Serviços personalizados";
+        bookingSelectedCustomPrice.textContent = price || "Sob consulta";
+      } else {
+        bookingSelectedPreview.style.display = "flex";
+        bookingSelectedCustom.style.display = "none";
+        if (image) {
+          bookingSelectedImg.src = image;
+          bookingSelectedImg.alt = service;
+        }
+        bookingSelectedName.textContent = service;
+        bookingSelectedPrice.textContent = `A partir de ${price}`;
+      }
+    });
+  });
+
+  // Navegação entre steps
+  if (bookingNextBtn) {
+    bookingNextBtn.addEventListener("click", () => {
+      if (selectedBookingService) {
+        goToBookingStep(2);
+        if (selectedBookingService === "Serviços personalizados") {
+          bookingCustomField.style.display = "flex";
+          bookingCustomTextarea.required = true;
+        } else {
+          bookingCustomField.style.display = "none";
+          bookingCustomTextarea.required = false;
+        }
+      }
+    });
+  }
+
+  if (bookingBackBtn) {
+    bookingBackBtn.addEventListener("click", () => {
+      goToBookingStep(1);
+    });
+  }
+
+  // Envio do formulário
+  if (bookingForm) {
+    bookingForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      
+      const name = document.getElementById("booking-name")?.value || "";
+      const phone = document.getElementById("booking-phone")?.value || "";
+      const car = document.getElementById("booking-car")?.value || "";
+      const service = bookingServiceInput?.value || "";
+      const customService = bookingCustomTextarea?.value || "";
+      const message = document.getElementById("booking-message")?.value || "";
+      
+      let serviceText = service;
+      if ((service === "personalizado" || service === "Serviços personalizados") && customService) {
+        serviceText = `Serviços personalizados: ${customService}`;
+      }
+      
+      const whatsappMessage = `Olá! Meu nome é ${name}. Tenho interesse em ${serviceText || "um serviço"} para meu veículo: ${car}. ${message ? `Mensagem: ${message}` : ""}`;
+      window.open(`https://wa.me/5511943219718?text=${encodeURIComponent(whatsappMessage)}`, "_blank");
+      
+      goToBookingStep(3);
+      
+      setTimeout(() => {
+        const closeConfirmationBtn = document.querySelector(".booking-confirmation__close");
+        if (closeConfirmationBtn) {
+          closeConfirmationBtn.addEventListener("click", closeBookingModal);
+        }
+      }, 100);
+    });
+  }
 });

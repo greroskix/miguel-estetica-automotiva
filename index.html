@@ -31,7 +31,7 @@
         <nav class="nav">
           <a href="#about" class="nav__link">Sobre</a>
           <a href="#services" class="nav__link">Serviços</a>
-          <a href="#agendar" class="nav__link">Agendar</a>
+          <a href="#agendar" class="nav__link" id="nav-agendar-link">Agendar</a>
           <a href="#contact" class="nav__link">Contato</a>
         </nav>
         <div class="topbar__actions">
@@ -59,7 +59,7 @@
       <nav class="nav-mobile" id="nav-mobile">
         <a href="#about" class="nav-mobile__link">Sobre</a>
         <a href="#services" class="nav-mobile__link">Serviços</a>
-        <a href="#agendar" class="nav-mobile__link">Agendar</a>
+        <a href="#agendar" class="nav-mobile__link" id="nav-mobile-agendar-link">Agendar</a>
         <a href="#contact" class="nav-mobile__link">Contato</a>
         <a href="https://wa.me/5511943219718" target="_blank" rel="noopener noreferrer" class="nav-mobile__link nav-mobile__whatsapp">WhatsApp</a>
         <a href="https://www.instagram.com/miguelesteticaautomotiva/" target="_blank" rel="noopener noreferrer" class="nav-mobile__link nav-mobile__instagram">Instagram</a>
@@ -79,7 +79,7 @@
           </p>
 
           <div class="hero__actions">
-            <a href="#agendar" class="btn btn--primary">Agendar serviço</a>
+            <a href="#agendar" class="btn btn--primary btn--large">Agendar serviço</a>
             <a href="#services" class="btn btn--secondary">Ver serviços</a>
           </div>
         </section>
@@ -224,7 +224,7 @@
 
           <article class="service-card">
             <div class="service-card__image">
-              <img src="assets/img/carros-exposicao/carro2.jpeg" alt="Cristalização de pára-brisa automotiva" />
+              <img src="assets/img/lavagem-tradicional-parabrisa/capa.jpg" alt="Cristalização de pára-brisa automotiva" />
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Lavagem Tradicional + Cristalização de pára-brisa</h3>
@@ -238,7 +238,7 @@
 
           <article class="service-card">
             <div class="service-card__image">
-              <img src="assets/img/carros-exposicao/carro1.jpeg" alt="Lavagem tradicional + lavagem de motor automotiva" />
+              <img src="assets/img/lavagem-tradicional-motor/capa.jpg" alt="Lavagem tradicional + lavagem de motor automotiva" />
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Lavagem tradicional + Lavagem de motor</h3>
@@ -252,7 +252,7 @@
 
           <article class="service-card">
             <div class="service-card__image">
-              <img src="assets/img/carros-exposicao/carro3.jpeg" alt="Lavagem detalhada automotiva" />
+              <img src="assets/img/lavagem-detalhada/capa.jpg" alt="Lavagem detalhada automotiva" />
             </div>
             <div class="service-card__content">
               <h3 class="service-card__title">Lavagem detalhada</h3>
@@ -299,140 +299,22 @@
     </section>
 
     <section id="agendar" class="section section--dark section--border reveal">
-      <div class="container section__inner section__inner--contact">
-        <div>
+      <div class="container section__inner">
+        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
           <h2 class="section__title">Agendar serviço</h2>
           <p class="section__subtitle">
-            Envie os dados do seu veículo que retornamos com as melhores opções para você
+            Escolha o serviço que deseja e preencha seus dados. Entraremos em contato em breve!
           </p>
+          <button type="button" class="btn btn--primary btn--large btn--booking-cta" id="open-booking-modal">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 14px;">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            Agendar serviço agora
+          </button>
         </div>
-        <form class="form" id="booking-form">
-          <div class="form__step form__step--active" data-step="1">
-            <h3 class="form__step-title">Escolha o serviço</h3>
-            <div class="service-selection">
-              <div class="service-selection__grid">
-                <div class="service-selection__card" data-service="Lavagem tradicional" data-image="assets/img/lavagem-tradicional/capa.jpg" data-price="R$ 60">
-                  <div class="service-selection__card-image">
-                    <img src="assets/img/lavagem-tradicional/capa.jpg" alt="Lavagem tradicional" />
-                  </div>
-                  <div class="service-selection__card-content">
-                    <h4>Lavagem tradicional</h4>
-                    <span class="service-selection__card-price">A partir de R$ 60</span>
-                  </div>
-                </div>
-                <div class="service-selection__card" data-service="Lavagem tradicional + Cristalização de pára-brisa" data-image="assets/img/carros-exposicao/carro2.jpeg" data-price="R$ 90">
-                  <div class="service-selection__card-image">
-                    <img src="assets/img/carros-exposicao/carro2.jpeg" alt="Cristalização de pára-brisa" />
-                  </div>
-                  <div class="service-selection__card-content">
-                    <h4>Lavagem tradicional + Cristalização</h4>
-                    <span class="service-selection__card-price">A partir de R$ 90</span>
-                  </div>
-                </div>
-                <div class="service-selection__card" data-service="Lavagem tradicional + Lavagem de motor" data-image="assets/img/carros-exposicao/carro1.jpeg" data-price="R$ 140">
-                  <div class="service-selection__card-image">
-                    <img src="assets/img/carros-exposicao/carro1.jpeg" alt="Lavagem tradicional + lavagem de motor" />
-                  </div>
-                  <div class="service-selection__card-content">
-                    <h4>Lavagem tradicional + Motor</h4>
-                    <span class="service-selection__card-price">A partir de R$ 140</span>
-                  </div>
-                </div>
-                <div class="service-selection__card" data-service="Lavagem detalhada" data-image="assets/img/carros-exposicao/carro3.jpeg" data-price="R$ 150">
-                  <div class="service-selection__card-image">
-                    <img src="assets/img/carros-exposicao/carro3.jpeg" alt="Lavagem detalhada" />
-                  </div>
-                  <div class="service-selection__card-content">
-                    <h4>Lavagem detalhada</h4>
-                    <span class="service-selection__card-price">A partir de R$ 150</span>
-                  </div>
-                </div>
-                <div class="service-selection__card" data-service="Higienização interna" data-image="assets/img/higienizacao-interna/capa.jpeg" data-price="R$ 350">
-                  <div class="service-selection__card-image">
-                    <img src="assets/img/higienizacao-interna/capa.jpeg" alt="Higienização interna" />
-                  </div>
-                  <div class="service-selection__card-content">
-                    <h4>Higienização interna</h4>
-                    <span class="service-selection__card-price">A partir de R$ 350</span>
-                  </div>
-                </div>
-                <div class="service-selection__card service-selection__card--custom" data-service="Serviços personalizados" data-price="Sob consulta">
-                  <div class="service-selection__card-icon-wrapper">
-                    <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(33, 150, 243, 0.15)"/>
-                      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="rgba(33, 150, 243, 0.2)"/>
-                    </svg>
-                  </div>
-                  <div class="service-selection__card-content">
-                    <h4>Serviços personalizados</h4>
-                    <span class="service-selection__card-price">Sob consulta</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <input type="hidden" id="service" required />
-            <button type="button" class="btn btn--primary btn--full form__next-btn" disabled>
-              Continuar
-            </button>
-          </div>
-
-          <div class="form__step" data-step="2">
-            <div class="form__selected-service" id="selected-service-preview">
-              <div class="form__selected-service-image">
-                <img id="selected-service-img" src="" alt="" />
-              </div>
-              <div class="form__selected-service-info">
-                <h3 id="selected-service-name"></h3>
-                <span id="selected-service-price"></span>
-              </div>
-            </div>
-            <div class="form__selected-service-custom" id="selected-service-custom" style="display: none;">
-              <div class="form__selected-service-custom-icon">
-                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(33, 150, 243, 0.15)"/>
-                  <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="rgba(33, 150, 243, 0.2)"/>
-                </svg>
-              </div>
-              <div class="form__selected-service-custom-info">
-                <h3 id="selected-service-custom-name"></h3>
-                <span id="selected-service-custom-price"></span>
-              </div>
-            </div>
-            <div class="form__fields-group">
-              <div class="form__row">
-                <div class="form__field">
-                  <label for="name">Nome</label>
-                  <input id="name" type="text" placeholder="Seu nome completo" required />
-                </div>
-                <div class="form__field">
-                  <label for="phone">WhatsApp</label>
-                  <input id="phone" type="tel" placeholder="(00) 00000-0000" required />
-                </div>
-              </div>
-              <div class="form__field">
-                <label for="car">Carro</label>
-                <input id="car" type="text" placeholder="Modelo e ano do veículo" required />
-              </div>
-              <div class="form__field form__field--spaced" id="custom-service-field" style="display: none;">
-                <label for="custom-service">Descreva o serviço personalizado</label>
-                <textarea id="custom-service" rows="3" placeholder="Descreva o serviço que você precisa..."></textarea>
-              </div>
-              <div class="form__field form__field--spaced">
-                <label for="message">Mensagem (opcional)</label>
-                <textarea id="message" rows="3" placeholder="Conte rapidamente o que você precisa..."></textarea>
-              </div>
-            </div>
-            <div class="form__actions">
-              <button type="button" class="btn btn--secondary form__back-btn">Voltar</button>
-              <button type="submit" class="btn btn--primary btn--whatsapp-primary">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.372a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                </svg>
-                Enviar pelo WhatsApp
-              </button>
-            </div>
-          </div>
-        </form>
       </div>
     </section>
 
@@ -489,6 +371,194 @@
       <div class="service-modal__container">
         <button class="service-modal__close" aria-label="Fechar modal">&times;</button>
         <div class="service-modal__content" id="service-modal-content">
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Agendamento -->
+    <div class="booking-modal" id="booking-modal">
+      <div class="booking-modal__overlay"></div>
+      <div class="booking-modal__container">
+        <button class="booking-modal__close" aria-label="Fechar modal">&times;</button>
+        
+        <!-- Indicador de Progresso -->
+        <div class="booking-progress">
+          <div class="booking-progress__step booking-progress__step--active" data-step="1">
+            <div class="booking-progress__step-number">1</div>
+            <div class="booking-progress__step-label">Serviço</div>
+          </div>
+          <div class="booking-progress__line"></div>
+          <div class="booking-progress__step" data-step="2">
+            <div class="booking-progress__step-number">2</div>
+            <div class="booking-progress__step-label">Dados</div>
+          </div>
+          <div class="booking-progress__line"></div>
+          <div class="booking-progress__step" data-step="3">
+            <div class="booking-progress__step-number">3</div>
+            <div class="booking-progress__step-label">Confirmação</div>
+          </div>
+        </div>
+
+        <!-- Conteúdo do Modal -->
+        <div class="booking-modal__content">
+          <form class="booking-form" id="booking-modal-form">
+            <!-- Step 1: Escolher Serviço -->
+            <div class="booking-step booking-step--active" data-booking-step="1">
+              <h2 class="booking-step__title">Escolha o serviço</h2>
+              <p class="booking-step__subtitle">Selecione o serviço que deseja agendar</p>
+              
+              <div class="booking-services-grid">
+                <div class="booking-service-card" data-service="Lavagem tradicional" data-image="assets/img/lavagem-tradicional/capa.jpg" data-price="R$ 60">
+                  <div class="booking-service-card__image">
+                    <img src="assets/img/lavagem-tradicional/capa.jpg" alt="Lavagem tradicional" />
+                  </div>
+                  <div class="booking-service-card__content">
+                    <h4>Lavagem tradicional</h4>
+                    <span class="booking-service-card__price">A partir de R$ 60</span>
+                  </div>
+                </div>
+
+                <div class="booking-service-card" data-service="Lavagem tradicional + Cristalização de pára-brisa" data-image="assets/img/lavagem-tradicional-parabrisa/capa.jpg" data-price="R$ 90">
+                  <div class="booking-service-card__image">
+                    <img src="assets/img/lavagem-tradicional-parabrisa/capa.jpg" alt="Cristalização" />
+                  </div>
+                  <div class="booking-service-card__content">
+                    <h4>Lavagem + Cristalização</h4>
+                    <span class="booking-service-card__price">A partir de R$ 90</span>
+                  </div>
+                </div>
+
+                <div class="booking-service-card" data-service="Lavagem tradicional + Lavagem de motor" data-image="assets/img/lavagem-tradicional-motor/capa.jpg" data-price="R$ 140">
+                  <div class="booking-service-card__image">
+                    <img src="assets/img/lavagem-tradicional-motor/capa.jpg" alt="Lavagem de motor" />
+                  </div>
+                  <div class="booking-service-card__content">
+                    <h4>Lavagem + Motor</h4>
+                    <span class="booking-service-card__price">A partir de R$ 140</span>
+                  </div>
+                </div>
+
+                <div class="booking-service-card" data-service="Lavagem detalhada" data-image="assets/img/lavagem-detalhada/capa.jpg" data-price="R$ 150">
+                  <div class="booking-service-card__image">
+                    <img src="assets/img/lavagem-detalhada/capa.jpg" alt="Lavagem detalhada" />
+                  </div>
+                  <div class="booking-service-card__content">
+                    <h4>Lavagem detalhada</h4>
+                    <span class="booking-service-card__price">A partir de R$ 150</span>
+                  </div>
+                </div>
+
+                <div class="booking-service-card" data-service="Higienização interna" data-image="assets/img/higienizacao-interna/capa.jpeg" data-price="R$ 350">
+                  <div class="booking-service-card__image">
+                    <img src="assets/img/higienizacao-interna/capa.jpeg" alt="Higienização interna" />
+                  </div>
+                  <div class="booking-service-card__content">
+                    <h4>Higienização interna</h4>
+                    <span class="booking-service-card__price">A partir de R$ 350</span>
+                  </div>
+                </div>
+
+                <div class="booking-service-card booking-service-card--custom" data-service="Serviços personalizados" data-price="Sob consulta">
+                  <div class="booking-service-card__icon">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(33, 150, 243, 0.15)"/>
+                      <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="rgba(33, 150, 243, 0.2)"/>
+                    </svg>
+                  </div>
+                  <div class="booking-service-card__content">
+                    <h4>Serviços personalizados</h4>
+                    <span class="booking-service-card__price">Sob consulta</span>
+                  </div>
+                </div>
+              </div>
+
+              <input type="hidden" id="booking-service" required />
+              <div class="booking-step__actions">
+                <button type="button" class="btn btn--primary btn--full booking-step__next" disabled>
+                  Continuar
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2: Dados Pessoais -->
+            <div class="booking-step" data-booking-step="2">
+              <h2 class="booking-step__title">Seus dados</h2>
+              <p class="booking-step__subtitle">Preencha suas informações para continuar</p>
+
+              <div class="booking-selected-service" id="booking-selected-service-preview">
+                <div class="booking-selected-service__image">
+                  <img id="booking-selected-img" src="" alt="" />
+                </div>
+                <div class="booking-selected-service__info">
+                  <h3 id="booking-selected-name"></h3>
+                  <span id="booking-selected-price"></span>
+                </div>
+              </div>
+
+              <div class="booking-selected-service booking-selected-service--custom" id="booking-selected-service-custom" style="display: none;">
+                <div class="booking-selected-service__icon">
+                  <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(33, 150, 243, 0.15)"/>
+                    <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.5" fill="rgba(33, 150, 243, 0.2)"/>
+                  </svg>
+                </div>
+                <div class="booking-selected-service__info">
+                  <h3 id="booking-selected-custom-name"></h3>
+                  <span id="booking-selected-custom-price"></span>
+                </div>
+              </div>
+
+              <div class="booking-form__fields">
+                <div class="booking-form__row">
+                  <div class="booking-form__field">
+                    <label for="booking-name">Nome completo</label>
+                    <input type="text" id="booking-name" placeholder="Seu nome completo" required />
+                  </div>
+                  <div class="booking-form__field">
+                    <label for="booking-phone">WhatsApp</label>
+                    <input type="tel" id="booking-phone" placeholder="(00) 00000-0000" required />
+                  </div>
+                </div>
+                <div class="booking-form__field">
+                  <label for="booking-car">Veículo</label>
+                  <input type="text" id="booking-car" placeholder="Modelo e ano do veículo" required />
+                </div>
+                <div class="booking-form__field" id="booking-custom-service-field" style="display: none;">
+                  <label for="booking-custom-service">Descreva o serviço personalizado</label>
+                  <textarea id="booking-custom-service" rows="3" placeholder="Descreva o serviço que você precisa..."></textarea>
+                </div>
+                <div class="booking-form__field">
+                  <label for="booking-message">Mensagem (opcional)</label>
+                  <textarea id="booking-message" rows="3" placeholder="Alguma observação adicional..."></textarea>
+                </div>
+              </div>
+
+              <div class="booking-step__actions">
+                <button type="button" class="btn btn--secondary booking-step__back">Voltar</button>
+                <button type="submit" class="btn btn--primary btn--whatsapp-primary">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.372a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                  </svg>
+                  Enviar pelo WhatsApp
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 3: Confirmação -->
+            <div class="booking-step" data-booking-step="3">
+              <div class="booking-confirmation">
+                <div class="booking-confirmation__icon">
+                  <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="#25D366" stroke-width="2" fill="rgba(37, 211, 102, 0.1)"/>
+                    <path d="M8 12l2 2 4-4" stroke="#25D366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <h2 class="booking-confirmation__title">Agendamento enviado!</h2>
+                <p class="booking-confirmation__message">Sua solicitação foi enviada com sucesso. Entraremos em contato em breve!</p>
+                <button type="button" class="btn btn--primary booking-confirmation__close">Fechar</button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
