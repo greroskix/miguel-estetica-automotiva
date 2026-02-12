@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 500);
     };
     
-    setInterval(changeImage, 4500);
+    setInterval(changeImage, 3000);
   }
 
   const revealElements = document.querySelectorAll(".reveal");
@@ -240,6 +240,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Produtos de qualidade",
         "Preço varia conforme o tamanho do carro"
       ],
+      beforeAfter: [
+        ["assets/img/lavagem-tradicional/molde3.jpeg", "assets/img/lavagem-tradicional/molde4.jpeg"]
+      ],
       images: [
         "assets/img/lavagem-tradicional/molde1.jpg",
         "assets/img/lavagem-tradicional/molde2.gif"
@@ -289,9 +292,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Produtos premium",
         "Acabamento impecável"
       ],
-      images: [
-        "assets/img/lavagem-detalhada/molde1.jpg",
-        "assets/img/lavagem-detalhada/molde2.jpg"
+      beforeAfter: [
+        ["assets/img/lavagem-detalhada/molde1.jpg", "assets/img/lavagem-detalhada/molde2.jpg"],
+        ["assets/img/lavagem-detalhada/molde3.jpg", "assets/img/lavagem-detalhada/molde4.jpg"]
       ]
     },
     higienizacao: {
@@ -305,6 +308,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "Remoção de odores e manchas",
         "Proteção e hidratação de materiais",
         "Preço varia conforme o carro"
+      ],
+      beforeAfter: [
+        ["assets/img/higienizacao-interna/molde4.jpeg", "assets/img/higienizacao-interna/molde3.jpeg"]
       ],
       images: [
         "assets/img/higienizacao-interna/molde1.gif",
@@ -350,6 +356,22 @@ document.addEventListener("DOMContentLoaded", () => {
               return `<img src="${img}" alt="${service.title}" loading="lazy" />`;
             }
           }).join('')}
+        </div>
+      ` : ''}
+      ${service.beforeAfter && service.beforeAfter.length > 0 ? `
+        <div class="service-modal__before-after">
+          ${service.beforeAfter.map((pair, i) => `
+            <div class="service-modal__before-after-pair">
+              <div class="service-modal__before-after-col">
+                <span class="service-modal__before-after-label">Antes</span>
+                <img src="${pair[0]}" alt="${service.title} - Antes" loading="lazy" />
+              </div>
+              <div class="service-modal__before-after-col">
+                <span class="service-modal__before-after-label">Depois</span>
+                <img src="${pair[1]}" alt="${service.title} - Depois" loading="lazy" />
+              </div>
+            </div>
+          `).join('')}
         </div>
       ` : ''}
       
