@@ -1,27 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   const heroImage = document.querySelector(".hero__image");
   if (heroImage) {
-    const images = [
-      "assets/img/carros-exposicao/carro1.jpeg",
-      "assets/img/carros-exposicao/carro2.jpeg",
-      "assets/img/carros-exposicao/carro3.jpeg",
-      "assets/img/carros-exposicao/carro4.jpeg",
-      "assets/img/carros-exposicao/carro5.jpeg"
-    ];
-    
+    const images = ["assets/img/carros-exposicao/carro1.jpeg", "assets/img/carros-exposicao/carro2.jpeg", "assets/img/carros-exposicao/carro3.jpeg", "assets/img/carros-exposicao/carro4.jpeg", "assets/img/carros-exposicao/carro5.jpeg"];
     let currentIndex = 0;
-    
+    heroImage.style.transition = "opacity 0.5s ease-in-out";
     const changeImage = () => {
       heroImage.style.opacity = "0";
-      heroImage.style.transition = "opacity 0.5s ease-in-out";
-      
       setTimeout(() => {
         currentIndex = (currentIndex + 1) % images.length;
         heroImage.src = images[currentIndex];
         heroImage.style.opacity = "1";
       }, 500);
     };
-    
     setInterval(changeImage, 3000);
   }
 
@@ -53,32 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const navMobile = document.getElementById("nav-mobile");
   const navMobileLinks = document.querySelectorAll(".nav-mobile__link");
 
+  let closeMobileMenu = () => {};
   if (menuToggle && navMobile) {
     const toggleMenu = (isActive) => {
       menuToggle.classList.toggle("active", isActive);
       navMobile.classList.toggle("active", isActive);
       navMobile.style.pointerEvents = isActive ? "auto" : "none";
     };
-
-    menuToggle.addEventListener("click", () => {
-      const isActive = !menuToggle.classList.contains("active");
-      toggleMenu(isActive);
-    });
-
-    navMobileLinks.forEach((link) => {
-      link.addEventListener("click", () => {
-        toggleMenu(false);
-      });
-    });
-
+    closeMobileMenu = () => toggleMenu(false);
+    menuToggle.addEventListener("click", () => toggleMenu(!menuToggle.classList.contains("active")));
+    navMobileLinks.forEach((link) => link.addEventListener("click", closeMobileMenu));
     document.addEventListener("click", (e) => {
-      if (
-        navMobile.classList.contains("active") &&
-        !menuToggle.contains(e.target) &&
-        !navMobile.contains(e.target)
-      ) {
-        toggleMenu(false);
-      }
+      if (navMobile.classList.contains("active") && !menuToggle.contains(e.target) && !navMobile.contains(e.target)) closeMobileMenu();
     });
   }
 
@@ -98,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const formatStat = (val, suffix) => suffix === "+" ? `+${val}` : suffix === "%" ? `${val}%` : suffix === ".0" ? (typeof val === "number" ? val.toFixed(1) : val) : val;
+  const formatStat = (val, suffix) => suffix === "+" ? `+${val}` : suffix === "%" ? `${val}%` : suffix === ".0" ? Number(val).toFixed(1) : val;
   const animateCounter = (element, target, suffix = "", duration = 2000) => {
     let start = 0;
     const inc = target / (duration / 16);
@@ -133,52 +109,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const reviewCards = document.querySelectorAll(".review__card");
   if (reviewCards.length > 0) {
+    const reviewObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+        reviewObserver.unobserve(el);
+      });
+    }, { threshold: 0.2 });
     reviewCards.forEach((card, index) => {
       card.style.opacity = "0";
       card.style.transform = "translateY(30px)";
       card.style.transition = `all 0.6s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.1}s`;
-
-      const reviewObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.style.opacity = "1";
-            entry.target.style.transform = "translateY(0)";
-            reviewObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.2 });
-
       reviewObserver.observe(card);
     });
   }
 
   let lastScroll = 0;
+  let lastHeaderHidden = false;
+  let lastShadow = "";
   let scrollTicking = false;
   const header = document.querySelector(".topbar");
+  const SHADOW_DEFAULT = "0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 4px 24px rgba(0, 0, 0, 0.4)";
+  const SHADOW_SCROLL = "0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 8px 32px rgba(0, 0, 0, 0.6)";
   if (header) {
     window.addEventListener("scroll", () => {
       if (!scrollTicking) {
         window.requestAnimationFrame(() => {
           const currentScroll = window.pageYOffset;
-          
+          const hidden = currentScroll > 0 && currentScroll > lastScroll && currentScroll > 100;
+          const shadow = currentScroll > 50 ? SHADOW_SCROLL : SHADOW_DEFAULT;
           if (currentScroll <= 0) {
-            header.style.boxShadow = "0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 4px 24px rgba(0, 0, 0, 0.4)";
-            lastScroll = currentScroll;
-            scrollTicking = false;
-            return;
-          }
-
-          if (currentScroll > lastScroll && currentScroll > 100) {
-            header.style.transform = "translateY(-100%)";
-            header.style.transition = "transform 0.3s ease-in-out";
+            lastHeaderHidden = false;
+            if (lastShadow !== SHADOW_DEFAULT) {
+              header.style.boxShadow = SHADOW_DEFAULT;
+              lastShadow = SHADOW_DEFAULT;
+            }
           } else {
-            header.style.transform = "translateY(0)";
+            if (lastHeaderHidden !== hidden) {
+              header.style.transform = hidden ? "translateY(-100%)" : "translateY(0)";
+              header.style.transition = "transform 0.3s ease-in-out";
+              lastHeaderHidden = hidden;
+            }
+            if (lastShadow !== shadow) {
+              header.style.boxShadow = shadow;
+              lastShadow = shadow;
+            }
           }
-
-          header.style.boxShadow = currentScroll > 50 
-            ? "0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 8px 32px rgba(0, 0, 0, 0.6)"
-            : "0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 4px 24px rgba(0, 0, 0, 0.4)";
-
           lastScroll = currentScroll;
           scrollTicking = false;
         });
@@ -346,11 +324,16 @@ document.addEventListener("DOMContentLoaded", () => {
       </ul>
       
       <div class="service-modal__cta">
-        <a href="#agendar" class="btn btn--primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = ''; setTimeout(() => { if (window.openBookingModal) window.openBookingModal(); else document.getElementById('open-booking-modal')?.click(); }, 300);">Agendar serviço</a>
-        <a href="https://wa.me/5511943219718?text=${encodeURIComponent('Quero saber mais sobre ' + service.title.toLowerCase())}" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp-primary" onclick="document.getElementById('service-modal').classList.remove('active'); document.body.style.overflow = '';">Falar no WhatsApp</a>
+        <a href="#agendar" class="btn btn--primary" data-service-cta="agendar">Agendar serviço</a>
+        <a href="https://wa.me/5511943219718?text=${encodeURIComponent('Quero saber mais sobre ' + service.title.toLowerCase())}" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp-primary" data-service-cta="whatsapp">Falar no WhatsApp</a>
       </div>
     `;
-
+    serviceModalContent.querySelector("[data-service-cta=agendar]")?.addEventListener("click", (e) => {
+      e.preventDefault();
+      closeServiceModal();
+      setTimeout(() => (window.openBookingModal ? window.openBookingModal() : document.getElementById("open-booking-modal")?.click()), 300);
+    });
+    serviceModalContent.querySelector("[data-service-cta=whatsapp]")?.addEventListener("click", () => closeServiceModal());
     serviceModal.classList.add("active");
     document.body.style.overflow = "hidden";
   };
@@ -358,20 +341,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeServiceModal = () => {
     serviceModal.classList.remove("active");
     document.body.style.overflow = "";
-    
-    const gallery = serviceModalContent.querySelector('.service-modal__gallery');
-    if (gallery) {
-      const mediaElements = gallery.querySelectorAll('img, video');
-      mediaElements.forEach(element => {
-        if (element.src && (element.src.endsWith('.gif') || element.src.includes('.gif'))) {
-          const src = element.src;
-          element.src = '';
-          setTimeout(() => {
-            element.src = src;
-          }, 10);
-        }
-      });
-    }
+    const gallery = serviceModalContent.querySelector(".service-modal__gallery");
+    gallery?.querySelectorAll("img, video").forEach((el) => {
+      if (el.src?.includes(".gif")) {
+        const s = el.src;
+        el.src = "";
+        setTimeout(() => (el.src = s), 10);
+      }
+    });
   };
 
   serviceButtons.forEach((button) => {
@@ -413,10 +390,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentIndex = 0;
     let autoTimer = null;
     let touchStartX = 0;
-
-    function isMobile() {
-      return window.innerWidth <= MOBILE_BREAKPOINT;
-    }
 
     function updateTransform() {
       track.style.transform = `translateX(-${currentIndex * 100}%)`;
@@ -477,7 +450,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function enableCarousel() {
-      if (!isMobile()) return;
       track.style.transform = "";
       currentIndex = 0;
       buildDots();
@@ -553,14 +525,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const resetBookingForm = () => {
-    bookingSteps.forEach((step, i) => {
-      step.classList.toggle("booking-step--active", i === 0);
-    });
-    bookingServiceCards.forEach(c => c.classList.remove("selected"));
-    if (bookingNextBtn) {
-      bookingNextBtn.disabled = true;
-      bookingNextBtn.style.opacity = "0.5";
-    }
+    bookingSteps.forEach((step, i) => step.classList.toggle("booking-step--active", i === 0));
+    bookingServiceCards.forEach((c) => c.classList.remove("selected"));
+    if (bookingNextBtn) bookingNextBtn.disabled = true;
     selectedBookingService = null;
     bookingForm?.reset();
   };
@@ -623,15 +590,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const navMobileAgendarLink = document.getElementById("nav-mobile-agendar-link");
-  if (navMobileAgendarLink && menuToggle && navMobile) {
-    navMobileAgendarLink.addEventListener("click", () => {
-      if (navMobile.classList.contains("active")) {
-        menuToggle.classList.remove("active");
-        navMobile.classList.remove("active");
-        navMobile.style.pointerEvents = "none";
-      }
-    });
-  }
+  if (navMobileAgendarLink) navMobileAgendarLink.addEventListener("click", closeMobileMenu);
 
   if (closeBookingBtn) {
     closeBookingBtn.addEventListener("click", closeBookingModal);
@@ -657,17 +616,15 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedBookingService = service;
       bookingServiceInput.value = service;
       bookingNextBtn.disabled = false;
-      bookingNextBtn.style.opacity = "1";
-      bookingNextBtn.style.cursor = "pointer";
 
       if (service === "Serviços personalizados") {
-        bookingSelectedPreview.style.display = "none";
-        bookingSelectedCustom.style.display = "flex";
+        bookingSelectedPreview.classList.add("is-hidden");
+        bookingSelectedCustom.classList.remove("is-hidden");
         bookingSelectedCustomName.textContent = "Serviços personalizados";
         bookingSelectedCustomPrice.textContent = price || "Sob consulta";
       } else {
-        bookingSelectedPreview.style.display = "flex";
-        bookingSelectedCustom.style.display = "none";
+        bookingSelectedPreview.classList.remove("is-hidden");
+        bookingSelectedCustom.classList.add("is-hidden");
         if (image) {
           bookingSelectedImg.src = image;
           bookingSelectedImg.alt = service;
@@ -683,10 +640,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (selectedBookingService) {
         goToBookingStep(2);
         if (selectedBookingService === "Serviços personalizados") {
-          bookingCustomField.style.display = "flex";
+          bookingCustomField.classList.remove("is-hidden");
           bookingCustomTextarea.required = true;
         } else {
-          bookingCustomField.style.display = "none";
+          bookingCustomField.classList.add("is-hidden");
           bookingCustomTextarea.required = false;
         }
       }

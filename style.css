@@ -25,6 +25,22 @@ body {
   --accent-secondary: #00bcd4;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -293,7 +309,6 @@ button {
   border: none;
 }
 
-/* Cinza quando faltam campos; azul quando tudo preenchido (botão sempre clicável para mostrar aviso) */
 .btn--agendar.btn--agendar--invalid,
 .booking-step__actions .btn--agendar.btn--agendar--invalid {
   background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
@@ -486,12 +501,9 @@ button {
 
 .hero__actions {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 1rem;
-  justify-content: flex-start;
-  margin-bottom: 1.5rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem 0 1.5rem;
   flex-wrap: wrap;
 }
 
@@ -551,7 +563,6 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent;
   min-height: 0;
 }
 
@@ -586,13 +597,10 @@ button {
   border-radius: 28px;
   display: block;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.85);
-  transform: scale(1);
-  transform-origin: center;
   transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s ease, box-shadow 0.4s ease;
   filter: saturate(1.15) contrast(1.05) brightness(1.02);
   position: relative;
   z-index: 2;
-  background: transparent;
 }
 
 .hero__image-wrapper:hover .hero__image {
@@ -726,7 +734,6 @@ button {
   margin: 0 auto;
 }
 
-/* Cards de Serviços – desktop: grid; mobile: carousel via .services-carousel */
 .services-carousel {
   margin-top: 2rem;
 }
@@ -791,6 +798,16 @@ button {
 
 .service-card__image--custom .service-card__custom-icon {
   opacity: 0.9;
+  color: white;
+}
+
+.service-card__image--custom .service-card__custom-icon path,
+.service-card__image--custom .service-card__custom-icon circle {
+  fill: rgba(255, 255, 255, 0.2);
+}
+
+.service-card__image--custom .service-card__custom-icon path {
+  fill: rgba(255, 255, 255, 0.15);
 }
 
 .service-card__image img {
@@ -869,7 +886,6 @@ button {
   box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
 }
 
-/* Modal de Serviço */
 .service-modal {
   position: fixed;
   inset: 0;
@@ -948,7 +964,7 @@ button {
   font-size: 2rem;
   font-weight: 700;
   color: #1a1a1a;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 .5rem;
 }
 
 .service-modal__price {
@@ -958,7 +974,6 @@ button {
   margin: 0;
 }
 
-/* Antes / Depois (lavagem detalhada etc.) */
 .service-modal__before-after {
   display: flex;
   flex-direction: column;
@@ -1036,8 +1051,7 @@ button {
 }
 
 .service-modal__features li {
-  padding: 0.75rem 0;
-  padding-left: 2rem;
+  padding: 0.75rem 0 0.75rem 2rem;
   position: relative;
   color: #333;
   font-size: 0.95rem;
@@ -1199,7 +1213,6 @@ button {
 
 .about__stats {
   display: flex;
-  flex-direction: row;
   gap: 1.5rem;
   justify-content: center;
   flex-wrap: wrap;
@@ -1430,10 +1443,6 @@ button {
   text-decoration: underline;
 }
 
-.contact__phone-link strong {
-  color: inherit;
-}
-
 .contact__map-wrapper {
   position: relative;
   width: 100%;
@@ -1480,7 +1489,6 @@ button {
 
 .footer__main {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -1541,13 +1549,6 @@ button {
 .reveal--visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-/* Media Queries */
-@media (min-width: 1200px) {
-  .services-carousel__track {
-    grid-template-columns: repeat(3, 1fr);
-  }
 }
 
 @media (max-width: 1200px) and (min-width: 721px) {
@@ -1663,7 +1664,6 @@ button {
     padding: 0 1.25rem;
   }
 
-  /* Carrossel apenas no mobile: um card por vez, swipe e troca automática a cada 3s */
   .services-carousel__viewport {
     overflow: hidden;
     touch-action: pan-y pinch-zoom;
@@ -1872,7 +1872,6 @@ button {
   }
 }
 
-/* Botão principal da seção Agendar (abre o modal) */
 .btn--booking-cta {
   padding: 1.25rem 2.5rem;
   font-size: 1.1rem;
@@ -1900,7 +1899,6 @@ button {
   }
 }
 
-/* Modal de Agendamento */
 .booking-modal {
   position: fixed;
   inset: 0;
@@ -1973,10 +1971,9 @@ button {
   padding: 3rem 2.5rem 2.5rem;
 }
 
-/* Indicador de Progresso – 5 colunas iguais para espaçamento uniforme (1, 2 e 3) */
 .booking-progress {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: repeat(5, 1fr);
   column-gap: 0.5rem;
   align-items: flex-start;
   justify-items: center;
@@ -2044,7 +2041,6 @@ button {
   font-weight: 600;
 }
 
-/* Linhas com largura igual (colunas 1fr do grid), alinhadas ao centro dos círculos */
 .booking-progress__line {
   width: 100%;
   min-width: 8px;
@@ -2061,7 +2057,6 @@ button {
   background: #2196f3;
 }
 
-/* Steps do Formulário */
 .booking-step {
   display: none;
   animation: fadeIn 0.4s ease;
@@ -2086,7 +2081,6 @@ button {
   margin-bottom: 2rem;
 }
 
-/* Grid de Serviços */
 .booking-services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -2163,7 +2157,6 @@ button {
   color: #2196f3;
 }
 
-/* Serviço Selecionado Preview */
 .booking-selected-service {
   display: flex;
   align-items: center;
@@ -2218,7 +2211,6 @@ button {
   color: #2196f3;
 }
 
-/* Campos do Formulário */
 .booking-form__fields {
   display: flex;
   flex-direction: column;
@@ -2266,7 +2258,6 @@ button {
   min-height: 100px;
 }
 
-/* Ações dos Steps */
 .booking-step__actions {
   display: flex;
   gap: 1rem;
@@ -2278,7 +2269,6 @@ button {
   min-width: 140px;
 }
 
-/* Continuar: azul só quando um serviço estiver selecionado (botão habilitado) */
 .booking-step__next:disabled {
   background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
   color: rgba(255, 255, 255, 0.6);
@@ -2297,7 +2287,6 @@ button {
   box-shadow: 0 6px 20px rgba(33, 150, 243, 0.4);
 }
 
-/* Confirmação */
 .booking-confirmation {
   text-align: center;
   padding: 2rem 0;
@@ -2353,14 +2342,12 @@ button {
   min-width: 200px;
 }
 
-/* Botão Grande no Hero */
 .btn--large {
   padding: 1rem 2.5rem;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
   .booking-modal {
     padding: 0.5rem;
@@ -2387,6 +2374,8 @@ button {
 
   .booking-selected-service {
     min-width: 0;
+    padding: 0.75rem;
+    gap: 0.75rem;
   }
 
   .booking-selected-service__info {
@@ -2398,11 +2387,6 @@ button {
     word-wrap: break-word;
     overflow-wrap: break-word;
     font-size: 0.9rem;
-  }
-
-  .booking-selected-service {
-    padding: 0.75rem;
-    gap: 0.75rem;
   }
 
   .booking-selected-service__image,
@@ -2447,18 +2431,13 @@ button {
   .booking-progress {
     padding: 5.25rem 1.25rem 0.75rem;
     margin-bottom: 1.5rem;
-    max-width: 300px;
+    max-width: min(300px, 100%);
     margin-left: auto;
     margin-right: auto;
   }
 
-  /* Círculos 36px: linha ao centro = 17px do topo */
   .booking-progress__line {
     margin-top: 17px;
-  }
-
-  .booking-progress {
-    max-width: min(300px, 100%);
   }
 
   .booking-progress__step-label {
@@ -2561,9 +2540,6 @@ button {
 
   .booking-progress {
     padding: 5.25rem 1rem 0.75rem;
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 
