@@ -597,22 +597,36 @@ document.addEventListener("DOMContentLoaded", () => {
   if (bookingForm) {
     bookingForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      
-      const name = document.getElementById("booking-name")?.value || "";
-      const phone = document.getElementById("booking-phone")?.value || "";
-      const car = document.getElementById("booking-car")?.value || "";
+
+      const nameEl = document.getElementById("booking-name");
+      const phoneEl = document.getElementById("booking-phone");
+      const carEl = document.getElementById("booking-car");
+
+      const name = (nameEl?.value || "").trim();
+      const phoneRaw = (phoneEl?.value || "").trim();
+      const car = (carEl?.value || "").trim();
       const service = bookingServiceInput?.value || "";
-      const customService = bookingCustomTextarea?.value || "";
-      const message = document.getElementById("booking-message")?.value || "";
-      
-      let serviceText = service;
-      if ((service === "personalizado" || service === "Serviços personalizados") && customService) {
-        serviceText = `Serviços personalizados: ${customService}`;
+      const customService = (bookingCustomTextarea?.value || "").trim();
+
+      const phoneDigits = phoneRaw.replace(/\D/g, "");
+      const errors = [];
+
+      if (!name) errors.push("Preencha o nome completo.");
+      if (!car) errors.push("Preencha o modelo e ano do veículo.");
+      if (!phoneRaw) {
+        errors.push("Preencha o número de WhatsApp.");
+      } else if (phoneDigits.length < 10) {
+        errors.push("O WhatsApp deve conter apenas números (mínimo 10 dígitos).");
       }
-      
-      const whatsappMessage = `Olá! Meu nome é ${name}. Tenho interesse em ${serviceText || "um serviço"} para meu veículo: ${car}. ${message ? `Mensagem: ${message}` : ""}`;
-      window.open(`https://wa.me/5511943219718?text=${encodeURIComponent(whatsappMessage)}`, "_blank");
-      
+      if (service === "Serviços personalizados" && !customService) {
+        errors.push("Descreva o serviço personalizado.");
+      }
+
+      if (errors.length > 0) {
+        alert(errors.join("\n"));
+        return;
+      }
+
       goToBookingStep(3);
     });
   }

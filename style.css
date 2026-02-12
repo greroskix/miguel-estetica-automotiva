@@ -284,6 +284,29 @@ button {
   transform: translateY(-1px);
 }
 
+.btn--agendar {
+  background: #2196f3;
+  color: #ffffff;
+  padding: 0.875rem 2rem;
+  font-weight: 600;
+  border: none;
+}
+
+.btn--agendar:hover {
+  background: #1976d2;
+  color: #ffffff;
+}
+
+.booking-step__actions .btn--agendar {
+  background: #2196f3;
+  color: #ffffff;
+}
+
+.booking-step__actions .btn--agendar:hover {
+  background: #1976d2;
+  color: #ffffff;
+}
+
 /* Menu mobile */
 .menu-toggle {
   display: none;
@@ -1710,75 +1733,6 @@ button {
 
   .logo span {
     display: none;
-  }
-}
-
-/* Seção de Agendamento */
-.btn--booking-cta {
-  padding: 1.5rem 4rem;
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-top: 2.5rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #2196f3 0%, #00bcd4 50%, #7c4dff 100%);
-  background-size: 200% 200%;
-  color: #ffffff;
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 12px 40px rgba(33, 150, 243, 0.4), 
-              0 0 0 0 rgba(33, 150, 243, 0.4),
-              0 0 60px rgba(124, 77, 255, 0.3);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  animation: gradient-shift 3s ease infinite;
-}
-
-.btn--booking-cta::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s ease;
-}
-
-.btn--booking-cta:hover::before {
-  left: 100%;
-}
-
-.btn--booking-cta:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 16px 50px rgba(33, 150, 243, 0.5), 
-              0 0 0 4px rgba(33, 150, 243, 0.2),
-              0 0 80px rgba(124, 77, 255, 0.4);
-  background-position: right center;
-}
-
-.btn--booking-cta:active {
-  transform: translateY(-2px) scale(0.98);
-}
-
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  .btn--booking-cta {
-    padding: 1.25rem 2.5rem;
-    font-size: 1.15rem;
-    width: 100%;
-    max-width: 100%;
-    margin-top: 2rem;
   }
 }
 
