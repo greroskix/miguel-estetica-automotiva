@@ -1,41 +1,68 @@
+<div align="center">
+
 # 🚗 Miguel Estética Automotiva
 
-> Landing page da **Miguel Estética Automotiva** — apresentação dos serviços, depoimentos e agendamento online integrado ao Calendly.
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/greroskix/miguel-estetica-automotiva)
+[![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white)](https://greroskix.github.io/miguel-estetica-automotiva/)
+
+*Landing page institucional da Miguel Estética Automotiva — serviços, depoimentos e agendamento online integrado ao Calendly.*
+
+</div>
 
 ---
 
-## ✨ O que é
+## 🌐 Site no ar
+
+### 🔗 Acesse a página online:
+**[👉 Clique aqui para visualizar o site no GitHub Pages](https://greroskix.github.io/miguel-estetica-automotiva/)**
+
+---
+
+## ✨ Sobre o projeto
 
 Site institucional para um serviço de estética automotiva em São Paulo. O visitante pode:
 
-- 📋 Conhecer os serviços (lavagem, cristalização, higienização, etc.)
-- 📖 Ver detalhes de cada serviço em modais
-- 📅 **Agendar** preenchendo um formulário que envia os dados direto para o **Calendly** (escolha de horário)
-- 📍 Ver endereço, horário e mapa
-- 📱 Falar por WhatsApp ou Instagram
+| Recurso | Descrição |
+|:--- |:--- |
+| 📋 **Serviços** | Conhecer lavagem, cristalização, higienização e outros serviços |
+| 📖 **Detalhes** | Ver informações de cada serviço em modais |
+| 📅 **Agendar** | Preencher formulário que envia os dados direto para o **Calendly** (escolha de horário) |
+| 📍 **Contato** | Ver endereço, horário e mapa |
+| 📱 **WhatsApp / Instagram** | Falar direto pelas redes |
 
-Tudo em uma página única, responsiva e com animações leves.
-
----
-
-## 🛠 Tecnologias
-
-| Tecnologia | Função |
-|------------|--------|
-| **HTML5** | Estrutura da página, seções, formulário e modais |
-| **CSS3** | Layout, cores, responsividade, animações e efeitos visuais |
-| **JavaScript** | Menu mobile, scroll suave, modais, validação do formulário e integração com Calendly |
-| **Calendly** | Agendamento online: o formulário do site preenche os dados no Calendly; o cliente só escolhe o horário |
-
-Sem frameworks, sem build — só arquivos estáticos.
+Tudo em uma página única, responsiva e com animações leves. Sem frameworks — apenas HTML, CSS e JavaScript estáticos.
 
 ---
 
-## 📁 Estrutura rápida
+## 📂 Estrutura do repositório
 
 ```
 ├── index.html      → Página principal
-├── style.css       → Estilos
-├── main.js         → Lógica e integração com Calendly
-└── assets/         → Imagens, favicon, etc.
+├── style.css       → Estilos e responsividade
+├── main.js         → Lógica, modais e integração com Calendly
+└── assets/         → Imagens, favicon, fontes
 ```
+
+---
+
+## 🛠️ Stack tecnológica
+
+| Tecnologia | Função |
+|:--- |:--- |
+| **HTML5** | Estrutura da página, seções, formulário e modais |
+| **CSS3** | Layout, cores, responsividade, animações e efeitos visuais |
+| **JavaScript** | Menu mobile, scroll suave, modais, validação do formulário e integração com Calendly |
+| **Calendly** | Agendamento online: o formulário preenche os dados no Calendly; o cliente só escolhe o horário |
+
+| Categoria | Tecnologias |
+|:--- |:--- |
+| **Frontend** | ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black) |
+| **Ferramentas** | ![Calendly](https://img.shields.io/badge/Calendly-006BFF?style=flat-square&logo=calendly&logoColor=white) |
+
+---
+
+<div align="center">
+
+*Feito por [@greroskix](https://github.com/greroskix)*
+
+</div>
