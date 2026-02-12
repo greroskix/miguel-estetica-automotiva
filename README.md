@@ -24,7 +24,7 @@ Tudo em uma página única, responsiva e com animações leves.
 |------------|--------|
 | **HTML5** | Estrutura da página, seções, formulário e modais |
 | **CSS3** | Layout, cores, responsividade, animações e efeitos visuais |
-| **JavaScript (vanilla)** | Menu mobile, scroll suave, modais, validação do formulário e integração com Calendly |
+| **JavaScript** | Menu mobile, scroll suave, modais, validação do formulário e integração com Calendly |
 | **Calendly** | Agendamento online: o formulário do site preenche os dados no Calendly; o cliente só escolhe o horário |
 
 Sem frameworks, sem build — só arquivos estáticos.
