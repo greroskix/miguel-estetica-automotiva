@@ -709,13 +709,24 @@ button {
   margin: 0 auto;
 }
 
-/* Cards de Serviços */
-.services-grid {
+/* Cards de Serviços – desktop: grid; mobile: carousel via .services-carousel */
+.services-carousel {
+  margin-top: 2rem;
+}
+
+.services-carousel__viewport {
+  overflow: visible;
+}
+
+.services-carousel__track {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 2rem;
-  margin-top: 2rem;
   align-items: start;
+}
+
+.services-carousel__dots {
+  display: none;
 }
 
 .service-card {
@@ -1521,13 +1532,13 @@ button {
 
 /* Media Queries */
 @media (min-width: 1200px) {
-  .services-grid {
+  .services-carousel__track {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 1200px) and (min-width: 721px) {
-  .services-grid {
+  .services-carousel__track {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -1639,9 +1650,52 @@ button {
     padding: 0 1.25rem;
   }
 
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+  /* Carrossel apenas no mobile: um card por vez, swipe e troca automática a cada 3s */
+  .services-carousel__viewport {
+    overflow: hidden;
+    touch-action: pan-y pinch-zoom;
+  }
+
+  .services-carousel__track {
+    display: flex;
+    grid-template-columns: unset;
+    gap: 0;
+    transition: transform 0.35s ease-out;
+    will-change: transform;
+  }
+
+  .services-carousel__track .service-card {
+    flex: 0 0 100%;
+    min-width: 100%;
+    scroll-snap-align: start;
+  }
+
+  .services-carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+    padding: 0 0.25rem;
+  }
+
+  .services-carousel__dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: rgba(255, 255, 255, 0.35);
+    cursor: pointer;
+    transition: background 0.25s ease, transform 0.2s ease;
+  }
+
+  .services-carousel__dots button:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .services-carousel__dots button[aria-selected="true"] {
+    background: #2196f3;
+    transform: scale(1.2);
   }
 
   .service-card__image {
@@ -1904,15 +1958,21 @@ button {
   padding: 3rem 2.5rem 2.5rem;
 }
 
-/* Indicador de Progresso */
+/* Indicador de Progresso – 5 colunas iguais para espaçamento uniforme (1, 2 e 3) */
 .booking-progress {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 2.5rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  column-gap: 0.5rem;
+  align-items: flex-start;
+  justify-items: center;
+  padding: 2rem 0 0;
   margin-bottom: 2rem;
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 320px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .booking-progress__step {
@@ -1920,8 +1980,8 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 0.5rem;
-  flex: 1;
   position: relative;
+  grid-column: span 1;
 }
 
 .booking-progress__step-number {
@@ -1962,6 +2022,7 @@ button {
   color: #999;
   font-weight: 500;
   transition: color 0.3s ease;
+  white-space: nowrap;
 }
 
 .booking-progress__step--active .booking-progress__step-label {
@@ -1969,13 +2030,16 @@ button {
   font-weight: 600;
 }
 
+/* Linhas com largura igual (colunas 1fr do grid), alinhadas ao centro dos círculos */
 .booking-progress__line {
-  flex: 1;
+  width: 100%;
+  min-width: 8px;
   height: 2px;
   background: #e0e0e0;
-  margin: 0 1rem;
-  margin-top: -20px;
+  margin-top: 19px;
   transition: background 0.3s ease;
+  align-self: flex-start;
+  justify-self: stretch;
 }
 
 .booking-progress__step--completed ~ .booking-progress__line,
@@ -2280,9 +2344,16 @@ button {
   }
 
   .booking-progress {
-    padding: 4.5rem 1rem 0.5rem;
+    padding: 5.25rem 1.25rem 0.75rem;
     margin-bottom: 1.5rem;
-    justify-content: center;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Círculos 36px: linha ao centro = 17px do topo */
+  .booking-progress__line {
+    margin-top: 17px;
   }
 
   .booking-modal__content {
@@ -2331,7 +2402,25 @@ button {
   }
 
   .booking-progress {
-    padding: 4.5rem 0.75rem 0.5rem;
-    justify-content: center;
+    padding: 5.25rem 1rem 0.75rem;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Celulares muito estreitos (ex.: Z Fold dobrado) – modal como card com margens */
+@media (max-width: 420px) {
+  .booking-modal {
+    padding: 0.5rem;
+    align-items: center;
+  }
+
+  .booking-modal__container {
+    max-width: 100%;
+    width: 100%;
+    height: calc(100dvh - 1rem);
+    max-height: calc(100dvh - 1rem);
+    border-radius: 16px;
   }
 }

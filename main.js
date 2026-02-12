@@ -400,6 +400,113 @@ document.addEventListener("DOMContentLoaded", () => {
     else if (bookingModal?.classList.contains("active")) closeBookingModal();
   });
 
+  /* Carrossel de serviços: apenas no mobile – troca a cada 3s + swipe com o dedo */
+  (function initServicesCarousel() {
+    const carousel = document.querySelector(".services-carousel");
+    const track = document.querySelector(".services-carousel__track");
+    const dotsContainer = document.querySelector(".services-carousel__dots");
+    if (!carousel || !track || !dotsContainer) return;
+
+    const cards = track.querySelectorAll(".service-card");
+    const total = cards.length;
+    if (total === 0) return;
+
+    const MOBILE_BREAKPOINT = 720;
+    let currentIndex = 0;
+    let autoTimer = null;
+    let touchStartX = 0;
+
+    function isMobile() {
+      return window.innerWidth <= MOBILE_BREAKPOINT;
+    }
+
+    function updateTransform() {
+      track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    function updateDots() {
+      const buttons = dotsContainer.querySelectorAll("button");
+      buttons.forEach((btn, i) => {
+        btn.setAttribute("aria-selected", i === currentIndex ? "true" : "false");
+      });
+    }
+
+    function goTo(index) {
+      currentIndex = ((index % total) + total) % total;
+      updateTransform();
+      updateDots();
+    }
+
+    function startAuto() {
+      stopAuto();
+      autoTimer = setInterval(() => goTo(currentIndex + 1), 3000);
+    }
+
+    function stopAuto() {
+      if (autoTimer) {
+        clearInterval(autoTimer);
+        autoTimer = null;
+      }
+    }
+
+    function onTouchStart(e) {
+      touchStartX = e.touches[0].clientX;
+    }
+
+    function onTouchEnd(e) {
+      const touchEndX = e.changedTouches[0].clientX;
+      const delta = touchStartX - touchEndX;
+      if (Math.abs(delta) < 50) return;
+      if (delta > 0) goTo(currentIndex + 1);
+      else goTo(currentIndex - 1);
+      startAuto();
+    }
+
+    function buildDots() {
+      dotsContainer.innerHTML = "";
+      for (let i = 0; i < total; i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-label", `Serviço ${i + 1} de ${total}`);
+        btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
+        btn.addEventListener("click", () => {
+          goTo(i);
+          startAuto();
+        });
+        dotsContainer.appendChild(btn);
+      }
+    }
+
+    function enableCarousel() {
+      if (!isMobile()) return;
+      track.style.transform = "";
+      currentIndex = 0;
+      buildDots();
+      updateTransform();
+      updateDots();
+      startAuto();
+      carousel.addEventListener("touchstart", onTouchStart, { passive: true });
+      carousel.addEventListener("touchend", onTouchEnd, { passive: true });
+    }
+
+    function disableCarousel() {
+      stopAuto();
+      carousel.removeEventListener("touchstart", onTouchStart);
+      carousel.removeEventListener("touchend", onTouchEnd);
+      track.style.transform = "";
+      dotsContainer.innerHTML = "";
+    }
+
+    const media = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT}px)`);
+    function onMatch() {
+      if (media.matches) enableCarousel();
+      else disableCarousel();
+    }
+    media.addEventListener("change", onMatch);
+    onMatch();
+  })();
+
   const bookingModal = document.getElementById("booking-modal");
   const openBookingBtn = document.getElementById("open-booking-modal");
   const closeBookingBtn = document.querySelector(".booking-modal__close");
