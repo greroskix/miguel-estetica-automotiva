@@ -324,8 +324,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "Entre em contato para mais informações"
       ],
       images: [
-        "assets/img/carros-exposicao/carro1.jpeg",
-        "assets/img/carros-exposicao/carro2.jpeg"
+        "assets/img/lavagem-detalhada/capa.jpg"
       ]
     }
   };
@@ -512,10 +511,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const navMobileAgendarLink = document.getElementById("nav-mobile-agendar-link");
-  if (navMobileAgendarLink) {
+  if (navMobileAgendarLink && menuToggle && navMobile) {
     navMobileAgendarLink.addEventListener("click", () => {
-      if (navMobile && navMobile.classList.contains("active")) {
-        toggleMenu(false);
+      if (navMobile.classList.contains("active")) {
+        menuToggle.classList.remove("active");
+        navMobile.classList.remove("active");
+        navMobile.style.pointerEvents = "none";
       }
     });
   }

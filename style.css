@@ -208,8 +208,8 @@ button {
   border-color: rgba(255, 255, 255, 0.2);
 }
 
-.btn--full {
-  width: 100%;
+.btn__icon {
+  margin-right: 14px;
 }
 
 .btn--instagram-header {
@@ -447,6 +447,7 @@ button {
   opacity: 0;
   transform: translateY(16px);
   animation: fade-up 0.8s ease 0.15s forwards;
+  padding: 1rem 0;
 }
 
 .hero__eyebrow {
@@ -454,15 +455,15 @@ button {
   letter-spacing: 0.16em;
   font-size: 0.78rem;
   color: #a0a0a0;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   text-align: left;
 }
 
 .hero__title {
   font-size: 3.15rem;
-  line-height: 1.08;
+  line-height: 1.15;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   letter-spacing: -0.015em;
   color: #ffffff;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
@@ -472,7 +473,7 @@ button {
   font-size: 1rem;
   color: #d8d8d8;
   line-height: 1.9;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
   font-weight: 400;
   max-width: 540px;
 }
@@ -484,6 +485,7 @@ button {
   gap: 1rem;
   justify-content: flex-start;
   margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
   flex-wrap: wrap;
 }
 
@@ -649,10 +651,6 @@ button {
   gap: 2rem;
 }
 
-.section__inner--contact {
-  gap: 2.5rem;
-}
-
 .section__title {
   font-size: 2rem;
   font-weight: 700;
@@ -708,6 +706,12 @@ button {
   text-decoration: underline;
 }
 
+.section__agendar-intro {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
 /* Cards de Serviços */
 .services-grid {
   display: grid;
@@ -751,6 +755,17 @@ button {
   background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.1) 100%);
   z-index: 1;
   pointer-events: none;
+}
+
+.service-card__image--custom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #2196f3 0%, #00bcd4 100%);
+}
+
+.service-card__image--custom .service-card__custom-icon {
+  opacity: 0.9;
 }
 
 .service-card__image img {
@@ -1371,9 +1386,31 @@ button {
 
 .footer__inner {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.footer__main {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
+}
+
+.footer__watermark {
+  font-size: 0.75rem;
+  color: #6b6b6b;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer__watermark:hover {
+  color: #a0a0a0;
 }
 
 /* Animações */
@@ -1508,13 +1545,13 @@ button {
 
   .hero__title {
     font-size: 2rem;
-    line-height: 1.1;
-    margin-bottom: 1.25rem;
+    line-height: 1.2;
+    margin-bottom: 1.75rem;
   }
 
   .hero__subtitle {
     font-size: 0.95rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2.25rem;
   }
 
   .hero__actions {
@@ -1522,6 +1559,7 @@ button {
     align-items: stretch;
     gap: 0.875rem;
     margin-bottom: 2rem;
+    margin-top: 0.75rem;
   }
 
   .hero__actions .btn {
@@ -1610,57 +1648,6 @@ button {
     padding: 1.25rem;
   }
 
-  .form__row {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .form {
-    padding: 2rem 1.5rem;
-  }
-
-  .service-selection__grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
-
-  .service-selection__card-image {
-    height: 100px;
-  }
-
-  .form__selected-service {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.25rem;
-  }
-
-  .form__selected-service-image {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1rem;
-  }
-
-  .form__selected-service-custom {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .form__selected-service-custom-icon {
-    width: 100px;
-    height: 100px;
-    margin: 0 auto 1rem;
-  }
-
-  .form__actions {
-    flex-direction: column;
-  }
-
-  .form__field input,
-  .form__field select,
-  .form__field textarea {
-    font-size: 0.9rem;
-    padding: 0.75rem 0.9rem;
-  }
-
   .contact__container {
     grid-template-columns: 1fr;
     gap: 2.5rem;
@@ -1731,7 +1718,12 @@ button {
 
   .footer__inner {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer__watermark {
+    margin-top: 0.25rem;
   }
 }
 

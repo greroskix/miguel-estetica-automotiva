@@ -31,7 +31,7 @@
         <nav class="nav">
           <a href="#about" class="nav__link">Sobre</a>
           <a href="#services" class="nav__link">Serviços</a>
-          <a href="#agendar" class="nav__link" id="nav-agendar-link">Agendar</a>
+          <a href="#agendar" class="nav__link">Agendar</a>
           <a href="#contact" class="nav__link">Contato</a>
         </nav>
         <div class="topbar__actions">
@@ -71,7 +71,7 @@
         <section class="hero__content">
           <p class="hero__eyebrow">Miguel Estética Automotiva</p>
           <h1 class="hero__title">
-            Brilho de carro sem riscos é o nosso padrão.
+            O padrão de fábrica foi apenas o começo.
           </h1>
           <p class="hero__subtitle">
             Cuidamos de cada detalhe: pintura, interior e proteção completa do
@@ -279,8 +279,8 @@
           </article>
 
           <article class="service-card">
-            <div class="service-card__image" style="background: linear-gradient(135deg, #2196f3 0%, #00bcd4 100%); display: flex; align-items: center; justify-content: center;">
-              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.9;">
+            <div class="service-card__image service-card__image--custom">
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="service-card__custom-icon" aria-hidden="true">
                 <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="rgba(255, 255, 255, 0.15)"/>
                 <circle cx="12" cy="12" r="3" stroke="white" stroke-width="1.5" fill="rgba(255, 255, 255, 0.2)"/>
               </svg>
@@ -300,14 +300,14 @@
 
     <section id="agendar" class="section section--dark section--border reveal">
       <div class="container section__inner">
-        <div style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <div class="section__agendar-intro">
           <h2 class="section__title">Agendar serviço</h2>
           <p class="section__subtitle">
             Escolha o serviço que deseja e preencha seus dados. Entraremos em contato em breve!
           </p>
           <p class="section__note">Qualquer dúvida, fale conosco: <a href="https://wa.me/5511943219718" target="_blank" rel="noopener noreferrer">(11) 94321-9718</a></p>
           <button type="button" class="btn btn--primary btn--large btn--booking-cta" id="open-booking-modal">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 14px;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="btn__icon" aria-hidden="true">
               <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
               <line x1="16" y1="2" x2="16" y2="6"></line>
               <line x1="8" y1="2" x2="8" y2="6"></line>
@@ -361,8 +361,11 @@
 
     <footer class="footer">
       <div class="container footer__inner">
-        <span>© 2026 Miguel Estética Automotiva</span>
-        <span>Cuidando do brilho e da limpeza do seu carro em cada detalhe.</span>
+        <div class="footer__main">
+          <span>© 2026 Miguel Estética Automotiva</span>
+          <span>Cuidando do brilho e da limpeza do seu carro em cada detalhe.</span>
+        </div>
+        <a href="https://www.instagram.com/greroskix/" target="_blank" rel="noopener noreferrer" class="footer__watermark">Feito por @greroskix</a>
       </div>
     </footer>
 
