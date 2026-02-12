@@ -436,6 +436,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingServiceInput = document.getElementById("booking-service");
   const bookingNextBtn = document.querySelector(".booking-step__next");
   const bookingBackBtn = document.querySelector(".booking-step__back");
+  const bookingBackFirstBtn = document.querySelector(".booking-step__back-first");
   const bookingSelectedPreview = document.getElementById("booking-selected-service-preview");
   const bookingSelectedCustom = document.getElementById("booking-selected-service-custom");
   const bookingSelectedImg = document.getElementById("booking-selected-img");
@@ -599,6 +600,12 @@ document.addEventListener("DOMContentLoaded", () => {
   if (bookingBackBtn) {
     bookingBackBtn.addEventListener("click", () => {
       goToBookingStep(1);
+    });
+  }
+
+  if (bookingBackFirstBtn) {
+    bookingBackFirstBtn.addEventListener("click", () => {
+      closeBookingModal();
     });
   }
 

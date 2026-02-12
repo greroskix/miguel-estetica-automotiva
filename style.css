@@ -271,6 +271,19 @@ button {
   box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
 }
 
+.btn--secondary {
+  background: transparent;
+  color: #666;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.btn--secondary:hover {
+  background: rgba(0, 0, 0, 0.05);
+  color: #333;
+  border-color: rgba(0, 0, 0, 0.25);
+  transform: translateY(-1px);
+}
+
 /* Menu mobile */
 .menu-toggle {
   display: none;
@@ -2241,6 +2254,8 @@ button {
   justify-content: center;
   padding: 2rem 2.5rem 0;
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .booking-progress__step {
@@ -2572,12 +2587,23 @@ button {
     border-radius: 16px;
   }
 
-  .booking-modal__content {
-    padding: 2rem 1.5rem;
+  .booking-modal__close {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    z-index: 20;
   }
 
   .booking-progress {
-    padding: 1.5rem 1rem 0;
+    padding: 3.5rem 1rem 0.5rem;
+    margin-bottom: 1.5rem;
+    justify-content: center;
+  }
+
+  .booking-modal__content {
+    padding: 1.5rem 1.5rem 2rem;
   }
 
   .booking-progress__step-label {
@@ -2611,5 +2637,18 @@ button {
 @media (max-width: 480px) {
   .booking-services-grid {
     grid-template-columns: 1fr;
+  }
+
+  .booking-modal__close {
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .booking-progress {
+    padding: 3rem 0.75rem 0.5rem;
+    justify-content: center;
   }
 }
