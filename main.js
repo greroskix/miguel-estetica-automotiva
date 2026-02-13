@@ -423,6 +423,113 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  (function initServicesCarousel() {
+    const viewport = document.querySelector(".services-carousel__viewport");
+    const track = document.querySelector(".services-carousel__track");
+    const dotsContainer = document.querySelector(".services-carousel__dots");
+    if (!viewport || !track || !dotsContainer) return;
+
+    const cards = track.querySelectorAll(".service-card");
+    const totalSlides = cards.length;
+    if (totalSlides === 0) return;
+
+    let currentIndex = 0;
+    let autoTimer = null;
+    let touchStartX = 0;
+    let touchCurrentX = 0;
+
+    const MOBILE_BREAKPOINT = 720;
+    const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
+
+    function updateTrack(offsetPx = 0) {
+      if (!isMobile()) return;
+      const w = viewport.offsetWidth;
+      const x = -currentIndex * w + offsetPx;
+      track.style.transform = `translateX(${x}px)`;
+    }
+
+    function goToSlide(index) {
+      currentIndex = ((index % totalSlides) + totalSlides) % totalSlides;
+      track.style.transition = "";
+      updateTrack(0);
+      dotsContainer.querySelectorAll("button").forEach((btn, i) => {
+        btn.setAttribute("aria-selected", i === currentIndex ? "true" : "false");
+      });
+      resetAuto();
+    }
+
+    function buildDots() {
+      dotsContainer.innerHTML = "";
+      for (let i = 0; i < totalSlides; i++) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-label", `Serviço ${i + 1}`);
+        btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
+        btn.addEventListener("click", () => goToSlide(i));
+        dotsContainer.appendChild(btn);
+      }
+    }
+
+    function startAuto() {
+      autoTimer = setInterval(() => {
+        if (!isMobile()) return;
+        goToSlide(currentIndex + 1);
+      }, 3000);
+    }
+
+    function resetAuto() {
+      if (autoTimer) clearInterval(autoTimer);
+      if (isMobile()) startAuto();
+    }
+
+    function onTouchStart(e) {
+      if (!isMobile()) return;
+      touchStartX = e.touches[0].clientX;
+      touchCurrentX = touchStartX;
+      track.style.transition = "none";
+    }
+
+    function onTouchMove(e) {
+      if (!isMobile()) return;
+      touchCurrentX = e.touches[0].clientX;
+      const diff = touchCurrentX - touchStartX;
+      if (Math.abs(diff) > 10) e.preventDefault();
+      updateTrack(diff);
+    }
+
+    function onTouchEnd() {
+      if (!isMobile()) return;
+      track.style.transition = "";
+      const diff = touchCurrentX - touchStartX;
+      const threshold = viewport.offsetWidth * 0.15;
+      if (diff < -threshold) goToSlide(currentIndex + 1);
+      else if (diff > threshold) goToSlide(currentIndex - 1);
+      else goToSlide(currentIndex);
+    }
+
+    function onResize() {
+      if (isMobile()) {
+        updateTrack(0);
+        if (dotsContainer.children.length !== totalSlides) buildDots();
+      } else {
+        track.style.transform = "";
+        track.style.transition = "";
+        if (autoTimer) clearInterval(autoTimer);
+      }
+    }
+
+    buildDots();
+    if (isMobile()) {
+      updateTrack(0);
+      startAuto();
+      viewport.addEventListener("touchstart", onTouchStart, { passive: true });
+      viewport.addEventListener("touchmove", onTouchMove, { passive: false });
+      viewport.addEventListener("touchend", onTouchEnd, { passive: true });
+    }
+    window.addEventListener("resize", onResize);
+  })();
+
   const bookingModal = document.getElementById("booking-modal");
   const openBookingBtn = document.getElementById("open-booking-modal");
   const closeBookingBtn = document.querySelector(".booking-modal__close");
@@ -443,6 +550,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingSelectedCustomPrice = document.getElementById("booking-selected-custom-price");
   const bookingCustomField = document.getElementById("booking-custom-service-field");
   const bookingCustomTextarea = document.getElementById("booking-custom-service");
+  const bookingAgendarBtn = document.querySelector(".btn--agendar");
+  const CALENDLY_URL = "https://calendly.com/miguelesteticautomotiva/agendamentos-estetica-automotiva";
 
   let currentBookingStep = 1;
   let selectedBookingService = null;
@@ -507,7 +616,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     currentBookingStep = step;
     updateBookingProgress();
+    if (step === 2) {
+      updateBookingStep2ServiceDisplay();
+      if (bookingAgendarBtn) updateAgendarButtonState();
+    }
   };
+
+  function updateBookingStep2ServiceDisplay() {
+    const isPersonalizado = selectedBookingService === "Serviços personalizados";
+    if (bookingSelectedPreview) {
+      if (isPersonalizado) {
+        bookingSelectedPreview.classList.add("is-hidden");
+      } else {
+        bookingSelectedPreview.classList.remove("is-hidden");
+      }
+    }
+    if (bookingSelectedCustom) {
+      if (isPersonalizado) {
+        bookingSelectedCustom.classList.remove("is-hidden");
+      } else {
+        bookingSelectedCustom.classList.add("is-hidden");
+      }
+    }
+    if (bookingCustomField) {
+      if (isPersonalizado) {
+        bookingCustomField.classList.remove("is-hidden");
+        if (bookingCustomTextarea) bookingCustomTextarea.required = true;
+      } else {
+        bookingCustomField.classList.add("is-hidden");
+        if (bookingCustomTextarea) bookingCustomTextarea.required = false;
+      }
+    }
+  }
+
+  function isBookingStep2Valid() {
+    const name = (document.getElementById("booking-name")?.value || "").trim();
+    const phoneRaw = (document.getElementById("booking-phone")?.value || "").trim();
+    const car = (document.getElementById("booking-car")?.value || "").trim();
+    const service = bookingServiceInput?.value || "";
+    const customService = (bookingCustomTextarea?.value || "").trim();
+    const phoneDigits = phoneRaw.replace(/\D/g, "");
+    if (!name || !car || phoneDigits.length < 10) return false;
+    if (service === "Serviços personalizados" && !customService.trim()) return false;
+    return true;
+  }
+
+  function updateAgendarButtonState() {
+    if (!bookingAgendarBtn) return;
+    if (isBookingStep2Valid()) {
+      bookingAgendarBtn.classList.remove("btn--agendar--invalid");
+    } else {
+      bookingAgendarBtn.classList.add("btn--agendar--invalid");
+    }
+  }
 
   if (openBookingBtn) {
     openBookingBtn.addEventListener("click", openBookingModal);
@@ -538,11 +699,11 @@ document.addEventListener("DOMContentLoaded", () => {
     card.addEventListener("click", function () {
       bookingServiceCards.forEach((c) => c.classList.remove("selected"));
       this.classList.add("selected");
-      
+
       const service = this.getAttribute("data-service");
       const image = this.getAttribute("data-image");
       const price = this.getAttribute("data-price");
-      
+
       selectedBookingService = service;
       bookingServiceInput.value = service;
       bookingNextBtn.disabled = false;
@@ -550,13 +711,13 @@ document.addEventListener("DOMContentLoaded", () => {
       bookingNextBtn.style.cursor = "pointer";
 
       if (service === "Serviços personalizados") {
-        bookingSelectedPreview.style.display = "none";
-        bookingSelectedCustom.style.display = "flex";
+        bookingSelectedPreview.classList.add("is-hidden");
+        bookingSelectedCustom.classList.remove("is-hidden");
         bookingSelectedCustomName.textContent = "Serviços personalizados";
         bookingSelectedCustomPrice.textContent = price || "Sob consulta";
       } else {
-        bookingSelectedPreview.style.display = "flex";
-        bookingSelectedCustom.style.display = "none";
+        bookingSelectedPreview.classList.remove("is-hidden");
+        bookingSelectedCustom.classList.add("is-hidden");
         if (image) {
           bookingSelectedImg.src = image;
           bookingSelectedImg.alt = service;
@@ -564,20 +725,25 @@ document.addEventListener("DOMContentLoaded", () => {
         bookingSelectedName.textContent = service;
         bookingSelectedPrice.textContent = `A partir de ${price}`;
       }
+      if (currentBookingStep === 2) {
+        updateBookingStep2ServiceDisplay();
+        updateAgendarButtonState();
+      }
     });
+  });
+
+  ["booking-name", "booking-phone", "booking-car", "booking-custom-service"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.addEventListener("input", updateAgendarButtonState);
+      el.addEventListener("change", updateAgendarButtonState);
+    }
   });
 
   if (bookingNextBtn) {
     bookingNextBtn.addEventListener("click", () => {
       if (selectedBookingService) {
         goToBookingStep(2);
-        if (selectedBookingService === "Serviços personalizados") {
-          bookingCustomField.style.display = "flex";
-          bookingCustomTextarea.required = true;
-        } else {
-          bookingCustomField.style.display = "none";
-          bookingCustomTextarea.required = false;
-        }
       }
     });
   }
@@ -606,10 +772,14 @@ document.addEventListener("DOMContentLoaded", () => {
       const nameEl = document.getElementById("booking-name");
       const phoneEl = document.getElementById("booking-phone");
       const carEl = document.getElementById("booking-car");
+      const emailEl = document.getElementById("booking-email");
+      const messageEl = document.getElementById("booking-message");
 
       const name = (nameEl?.value || "").trim();
       const phoneRaw = (phoneEl?.value || "").trim();
       const car = (carEl?.value || "").trim();
+      const email = (emailEl?.value || "").trim();
+      const message = (messageEl?.value || "").trim();
       const service = bookingServiceInput?.value || "";
       const customService = (bookingCustomTextarea?.value || "").trim();
 
@@ -632,6 +802,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      if (CALENDLY_URL) {
+        const params = new URLSearchParams();
+        params.set("name", name);
+        if (email) params.set("email", email);
+        params.set("a1", phoneRaw);
+        params.set("a2", car);
+        params.set("a3", service === "Serviços personalizados" ? customService : service);
+        const observacoes = service === "Serviços personalizados" ? (message || "") : message;
+        if (observacoes) params.set("a4", observacoes);
+        const url = CALENDLY_URL + (params.toString() ? "?" + params.toString() : "");
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
       goToBookingStep(3);
     });
   }
