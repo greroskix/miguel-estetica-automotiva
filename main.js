@@ -58,6 +58,8 @@ document.addEventListener("DOMContentLoaded", () => {
       menuToggle.classList.toggle("active", isActive);
       navMobile.classList.toggle("active", isActive);
       navMobile.style.pointerEvents = isActive ? "auto" : "none";
+      document.body.style.overflow = isActive ? "hidden" : "";
+      if (isActive) navMobile.scrollTop = 0;
     };
 
     menuToggle.addEventListener("click", () => {
@@ -73,6 +75,13 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           toggleMenu(false);
         }
+      });
+    });
+
+    const navMobileBtns = document.querySelectorAll(".nav-mobile__btn");
+    navMobileBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        setTimeout(() => toggleMenu(false), 150);
       });
     });
 
