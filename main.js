@@ -560,7 +560,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingCustomField = document.getElementById("booking-custom-service-field");
   const bookingCustomTextarea = document.getElementById("booking-custom-service");
   const bookingAgendarBtn = document.querySelector(".btn--agendar");
-  const CALENDLY_URL = "https://calendly.com/miguelesteticautomotiva/agendamentos-estetica-automotiva";
+
+  const CAL_COM_SERVICES = {
+    "Lavagem tradicional": "https://cal.com/miguel-estetica-automotiva/lavagem-tradicional",
+    "Lavagem tradicional + Cristalização de pára-brisa": "https://cal.com/miguel-estetica-automotiva/lavagem-tradicional-cristalizacao-de-para-brisa",
+    "Lavagem tradicional + Lavagem de motor": "https://cal.com/miguel-estetica-automotiva/lavagem-tradicional-lavagem-de-motor",
+    "Lavagem detalhada": "https://cal.com/miguel-estetica-automotiva/lavagem-detalhada",
+    "Higienização interna": "https://cal.com/miguel-estetica-automotiva/higienizacao-interna",
+    "Serviços personalizados": "https://cal.com/miguel-estetica-automotiva/servico-personalizado"
+  };
 
   let currentBookingStep = 1;
   let selectedBookingService = null;
@@ -811,16 +819,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (CALENDLY_URL) {
+      const baseUrl = CAL_COM_SERVICES[service];
+      if (baseUrl) {
+        const servicoTexto = service === "Serviços personalizados" ? customService : service;
+        const mensagem = service === "Serviços personalizados" ? (message || "") : message;
+        const whatsappCom55 = phoneDigits.startsWith("55") ? phoneDigits : "55" + phoneDigits;
         const params = new URLSearchParams();
         params.set("name", name);
-        if (email) params.set("email", email);
-        params.set("a1", phoneRaw);
-        params.set("a2", car);
-        params.set("a3", service === "Serviços personalizados" ? customService : service);
-        const observacoes = service === "Serviços personalizados" ? (message || "") : message;
-        if (observacoes) params.set("a4", observacoes);
-        const url = CALENDLY_URL + (params.toString() ? "?" + params.toString() : "");
+        params.set("email", email || "");
+        params.set("WhatsApp", whatsappCom55);
+        params.set("Veiculo", car);
+        params.set("Servico", servicoTexto);
+        params.set("Mensagem", mensagem);
+        const url = baseUrl + "?" + params.toString();
         window.open(url, "_blank", "noopener,noreferrer");
       }
       goToBookingStep(3);
