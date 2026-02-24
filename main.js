@@ -770,6 +770,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const bookingPhoneInput = document.getElementById("booking-phone");
+  if (bookingPhoneInput) {
+    bookingPhoneInput.addEventListener("input", (e) => {
+      const input = e.target;
+      let digits = (input.value || "").replace(/\D/g, "").slice(0, 11);
+
+      let formatted = "";
+      if (digits.length > 0) {
+        formatted = "(" + digits.substring(0, 2);
+        if (digits.length >= 3) {
+          formatted += ") " + digits.substring(2, 7);
+        }
+        if (digits.length >= 8) {
+          formatted += "-" + digits.substring(7);
+        }
+      }
+
+      input.value = formatted;
+    });
+  }
+
   if (bookingNextBtn) {
     bookingNextBtn.addEventListener("click", () => {
       if (selectedBookingService) {
