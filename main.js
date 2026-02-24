@@ -448,12 +448,30 @@ document.addEventListener("DOMContentLoaded", () => {
     let touchCurrentX = 0;
 
     const MOBILE_BREAKPOINT = 720;
+    const CAROUSEL_GAP_PX = 16;
     const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
+
+    function getSlideWidth() {
+      const vw = viewport.offsetWidth;
+      const cardWidth = vw - CAROUSEL_GAP_PX;
+      return cardWidth + CAROUSEL_GAP_PX;
+    }
+
+    function applyMobileSizes() {
+      if (!isMobile()) return;
+      const vw = viewport.offsetWidth;
+      const cardWidth = vw - CAROUSEL_GAP_PX;
+      const trackWidth = totalSlides * cardWidth + (totalSlides - 1) * CAROUSEL_GAP_PX;
+      track.style.width = `${trackWidth}px`;
+      cards.forEach((card) => {
+        card.style.width = `${cardWidth}px`;
+      });
+    }
 
     function updateTrack(offsetPx = 0) {
       if (!isMobile()) return;
-      const w = viewport.offsetWidth;
-      const x = -currentIndex * w + offsetPx;
+      const slideWidth = getSlideWidth();
+      const x = -currentIndex * slideWidth + offsetPx;
       track.style.transform = `translateX(${x}px)`;
     }
 
@@ -511,7 +529,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!isMobile()) return;
       track.style.transition = "";
       const diff = touchCurrentX - touchStartX;
-      const threshold = viewport.offsetWidth * 0.15;
+      const threshold = (viewport.offsetWidth - CAROUSEL_GAP_PX) * 0.15;
       if (diff < -threshold) goToSlide(currentIndex + 1);
       else if (diff > threshold) goToSlide(currentIndex - 1);
       else goToSlide(currentIndex);
@@ -519,17 +537,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function onResize() {
       if (isMobile()) {
+        applyMobileSizes();
         updateTrack(0);
         if (dotsContainer.children.length !== totalSlides) buildDots();
       } else {
+        track.style.width = "";
         track.style.transform = "";
         track.style.transition = "";
+        cards.forEach((card) => { card.style.width = ""; });
         if (autoTimer) clearInterval(autoTimer);
       }
     }
 
     buildDots();
     if (isMobile()) {
+      applyMobileSizes();
       updateTrack(0);
       startAuto();
       viewport.addEventListener("touchstart", onTouchStart, { passive: true });
