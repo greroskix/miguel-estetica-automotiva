@@ -448,7 +448,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let touchCurrentX = 0;
 
     const MOBILE_BREAKPOINT = 720;
-    const CAROUSEL_GAP_PX = 16;
+    const CAROUSEL_GAP_PX = 24;
     const isMobile = () => window.innerWidth <= MOBILE_BREAKPOINT;
 
     function getSlideWidth() {
@@ -582,15 +582,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingCustomField = document.getElementById("booking-custom-service-field");
   const bookingCustomTextarea = document.getElementById("booking-custom-service");
   const bookingAgendarBtn = document.querySelector(".btn--agendar");
-
-  const CAL_COM_SERVICES = {
-    "Lavagem tradicional": "https://cal.com/miguel-estetica-automotiva/lavagem-tradicional",
-    "Lavagem tradicional + Cristalização de pára-brisa": "https://cal.com/miguel-estetica-automotiva/lavagem-tradicional-cristalizacao-de-para-brisa",
-    "Lavagem tradicional + Lavagem de motor": "https://cal.com/miguel-estetica-automotiva/lavagem-tradicional-lavagem-de-motor",
-    "Lavagem detalhada": "https://cal.com/miguel-estetica-automotiva/lavagem-detalhada",
-    "Higienização interna": "https://cal.com/miguel-estetica-automotiva/higienizacao-interna",
-    "Serviços personalizados": "https://cal.com/miguel-estetica-automotiva/servico-personalizado"
-  };
 
   let currentBookingStep = 1;
   let selectedBookingService = null;
@@ -841,22 +832,30 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      const baseUrl = CAL_COM_SERVICES[service];
-      if (baseUrl) {
-        const servicoTexto = service === "Serviços personalizados" ? customService : service;
-        const mensagem = service === "Serviços personalizados" ? (message || "") : message;
-        const whatsappCom55 = phoneDigits.startsWith("55") ? phoneDigits : "55" + phoneDigits;
-        const params = new URLSearchParams();
-        params.set("name", name);
-        params.set("email", email || "");
-        params.set("WhatsApp", whatsappCom55);
-        params.set("Veiculo", car);
-        params.set("Servico", servicoTexto);
-        params.set("Mensagem", mensagem);
-        const url = baseUrl + "?" + params.toString();
-        window.open(url, "_blank", "noopener,noreferrer");
+      const numeroDestino = "5511943219718";
+      const linhasMensagem = [];
+
+      linhasMensagem.push(`Serviço Selecionado: ${service || "Não informado"}`);
+
+      if (service === "Serviços personalizados" && customService) {
+        linhasMensagem.push(`Serviço personalizado que deseja: ${customService}`);
       }
-      goToBookingStep(3);
+
+      linhasMensagem.push(`Nome: ${name}`);
+      linhasMensagem.push(`Telefone: ${phoneRaw}`);
+      linhasMensagem.push(`Carro e Ano: ${car}`);
+      linhasMensagem.push(`Email: ${email || ""}`);
+      linhasMensagem.push(`Mensagem Opcional: ${message || ""}`);
+
+      const textoWhatsApp = linhasMensagem.join("\n");
+      const urlWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
+
+      const novaJanela = window.open(urlWhatsApp, "_blank", "noopener,noreferrer");
+      if (!novaJanela) {
+        window.location.href = urlWhatsApp;
+      }
+
+      closeBookingModal();
     });
   }
 });

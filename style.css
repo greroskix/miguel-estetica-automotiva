@@ -944,6 +944,14 @@ button {
   color: #ffffff;
   margin: 0;
   line-height: 1.3;
+  /* garante mesma altura de título em todos os cards (até 2 linhas) */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 2.9rem;
 }
 
 .service-card__price {
@@ -965,6 +973,8 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  /* garante que a área de descrição tenha altura consistente entre os cards */
+  min-height: 3.8rem;
 }
 
 .service-card__button {
@@ -1782,7 +1792,7 @@ button {
   .services-carousel__track {
     display: flex;
     grid-template-columns: unset;
-    gap: 1rem;
+    gap: 1.5rem;
     transition: transform 0.35s ease-out;
     will-change: transform;
   }
@@ -1792,6 +1802,8 @@ button {
     min-width: 0;
     scroll-snap-align: start;
     box-sizing: border-box;
+    /* altura consistente entre todos os cards no carrossel mobile */
+    min-height: 420px;
   }
 
   .services-carousel__dots {
