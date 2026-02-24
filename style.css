@@ -2372,18 +2372,24 @@ button {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  position: relative;
 }
 
 .booking-form__field label {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #334155;
+  position: absolute;
+  left: 1.1rem;
+  top: 1.05rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #94a3b8;
   letter-spacing: 0.01em;
+  pointer-events: none;
+  transition: all 0.15s ease;
 }
 
 .booking-form__field input,
 .booking-form__field textarea {
-  padding: 0.9rem 1.1rem;
+  padding: 1.5rem 1.1rem 0.7rem;
   border: 1px solid #d4e0f0;
   border-radius: 12px;
   font-size: 1rem;
@@ -2395,7 +2401,7 @@ button {
 
 .booking-form__field input::placeholder,
 .booking-form__field textarea::placeholder {
-  color: #94a3b8;
+  color: transparent;
 }
 
 .booking-form__field input:focus,
@@ -2408,6 +2414,13 @@ button {
 .booking-form__field textarea {
   resize: vertical;
   min-height: 72px;
+}
+
+.booking-form__field:focus-within label,
+.booking-form__field.booking-form__field--filled label {
+  top: 0.3rem;
+  font-size: 0.7rem;
+  color: #1d4ed8;
 }
 
 .booking-step__actions {
@@ -2525,14 +2538,15 @@ button {
   .booking-modal__content {
     min-width: 0;
     overflow-x: hidden;
-    padding: 1rem 0.75rem 1.25rem;
+    padding: 2.2rem 1rem 1.4rem;
     box-sizing: border-box;
   }
 
   .booking-selected-service {
     min-width: 0;
-    padding: 0.75rem;
-    gap: 0.75rem;
+    padding: 0.9rem;
+    gap: 0.9rem;
+    margin-top: 1.25rem;
   }
 
   .booking-selected-service__info {
@@ -2577,11 +2591,11 @@ button {
   }
 
   .booking-modal__close {
-    top: 1rem;
-    right: 1rem;
-    width: 40px;
-    height: 40px;
-    font-size: 1.4rem;
+    top: 0.6rem;
+    right: 0.6rem;
+    width: 38px;
+    height: 38px;
+    font-size: 1.3rem;
     z-index: 20;
   }
 
@@ -2605,6 +2619,10 @@ button {
     width: 36px;
     height: 36px;
     font-size: 0.85rem;
+  }
+
+  .booking-modal.booking-modal--keyboard .booking-progress {
+    display: none;
   }
 
   .booking-services-grid {

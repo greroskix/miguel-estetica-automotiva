@@ -582,6 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const bookingCustomField = document.getElementById("booking-custom-service-field");
   const bookingCustomTextarea = document.getElementById("booking-custom-service");
   const bookingAgendarBtn = document.querySelector(".btn--agendar");
+  const bookingModalRoot = document.getElementById("booking-modal");
 
   let currentBookingStep = 1;
   let selectedBookingService = null;
@@ -765,10 +766,45 @@ document.addEventListener("DOMContentLoaded", () => {
   ["booking-name", "booking-phone", "booking-car", "booking-custom-service"].forEach((id) => {
     const el = document.getElementById(id);
     if (el) {
-      el.addEventListener("input", updateAgendarButtonState);
+      el.addEventListener("input", (e) => {
+        if (e.target.value && e.target.closest(".booking-form__field")) {
+          e.target.closest(".booking-form__field").classList.add("booking-form__field--filled");
+        } else if (e.target.closest(".booking-form__field")) {
+          e.target.closest(".booking-form__field").classList.remove("booking-form__field--filled");
+        }
+        updateAgendarButtonState();
+      });
       el.addEventListener("change", updateAgendarButtonState);
     }
   });
+
+  // Efeito de "modo teclado" no mobile: esconde card e stepper para dar mais espaço
+  const toggleKeyboardMode = (active) => {
+    if (!bookingModalRoot) return;
+    if (active) {
+      bookingModalRoot.classList.add("booking-modal--keyboard");
+    } else {
+      bookingModalRoot.classList.remove("booking-modal--keyboard");
+    }
+  };
+
+  if (bookingModalRoot) {
+    bookingModalRoot.addEventListener("focusin", (e) => {
+      if (window.innerWidth <= 768 && e.target.matches(".booking-form__field input, .booking-form__field textarea")) {
+        toggleKeyboardMode(true);
+      }
+    });
+
+    bookingModalRoot.addEventListener("focusout", () => {
+      if (window.innerWidth > 768) return;
+      setTimeout(() => {
+        const active = document.activeElement;
+        if (!active || !active.closest || !active.closest(".booking-modal")) {
+          toggleKeyboardMode(false);
+        }
+      }, 150);
+    });
+  }
 
   const bookingPhoneInput = document.getElementById("booking-phone");
   if (bookingPhoneInput) {
