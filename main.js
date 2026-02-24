@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
       autoTimer = setInterval(() => {
         if (!isMobile()) return;
         goToSlide(currentIndex + 1);
-      }, 3000);
+      }, 6000);
     }
 
     function resetAuto() {
