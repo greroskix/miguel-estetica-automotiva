@@ -502,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
       autoTimer = setInterval(() => {
         if (!isMobile()) return;
         goToSlide(currentIndex + 1);
-      }, 6000);
+      }, 8000);
     }
 
     function resetAuto() {
@@ -802,13 +802,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const nameEl = document.getElementById("booking-name");
       const phoneEl = document.getElementById("booking-phone");
       const carEl = document.getElementById("booking-car");
-      const emailEl = document.getElementById("booking-email");
       const messageEl = document.getElementById("booking-message");
 
       const name = (nameEl?.value || "").trim();
       const phoneRaw = (phoneEl?.value || "").trim();
       const car = (carEl?.value || "").trim();
-      const email = (emailEl?.value || "").trim();
       const message = (messageEl?.value || "").trim();
       const service = bookingServiceInput?.value || "";
       const customService = (bookingCustomTextarea?.value || "").trim();
@@ -836,16 +834,16 @@ document.addEventListener("DOMContentLoaded", () => {
       const linhasMensagem = [];
 
       linhasMensagem.push(`Serviço Selecionado: ${service || "Não informado"}`);
+      linhasMensagem.push("");
 
       if (service === "Serviços personalizados" && customService) {
-        linhasMensagem.push(`Serviço personalizado que deseja: ${customService}`);
+        linhasMensagem.push(`- Serviço personalizado que deseja: ${customService}`);
       }
 
-      linhasMensagem.push(`Nome: ${name}`);
-      linhasMensagem.push(`Telefone: ${phoneRaw}`);
-      linhasMensagem.push(`Carro e Ano: ${car}`);
-      linhasMensagem.push(`Email: ${email || ""}`);
-      linhasMensagem.push(`Mensagem Opcional: ${message || ""}`);
+      linhasMensagem.push(`- Nome: ${name}`);
+      linhasMensagem.push(`- Telefone: ${phoneRaw}`);
+      linhasMensagem.push(`- Carro e Ano: ${car}`);
+      linhasMensagem.push(`- Mensagem Opcional: ${message || ""}`);
 
       const textoWhatsApp = linhasMensagem.join("\n");
       const urlWhatsApp = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(textoWhatsApp)}`;
