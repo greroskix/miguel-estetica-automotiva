@@ -895,11 +895,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (service === "Serviços personalizados" && customService) {
         linhasMensagem.push(`- Serviço personalizado que deseja: ${customService}`);
+        linhasMensagem.push("");
       }
 
       linhasMensagem.push(`- Nome: ${name}`);
+      linhasMensagem.push("");
       linhasMensagem.push(`- Telefone: ${phoneRaw}`);
+      linhasMensagem.push("");
       linhasMensagem.push(`- Carro e Ano: ${car}`);
+      linhasMensagem.push("");
       linhasMensagem.push(`- Mensagem Opcional: ${message || ""}`);
 
       const textoWhatsApp = linhasMensagem.join("\n");
