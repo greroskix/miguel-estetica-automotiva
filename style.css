@@ -2387,6 +2387,10 @@ button {
   transition: all 0.15s ease;
 }
 
+.booking-form__required {
+  color: #dc2626;
+}
+
 .booking-form__field input,
 .booking-form__field textarea {
   padding: 1.5rem 1.1rem 0.7rem;
@@ -2465,6 +2469,48 @@ button {
 .booking-form__field:has(#booking-name).booking-form__field--filled label,
 .booking-form__field:has(#booking-phone):focus-within label,
 .booking-form__field:has(#booking-phone).booking-form__field--filled label {
+  top: auto;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+/* Mensagem (Opcional): título em cima e placeholder visível, igual aos outros campos */
+.booking-form__field:has(#booking-message) label {
+  position: static;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+.booking-form__field:has(#booking-message) textarea {
+  padding: 0.9rem 1.1rem;
+}
+.booking-form__field:has(#booking-message) textarea::placeholder {
+  color: #94a3b8;
+}
+.booking-form__field:has(#booking-message):focus-within label,
+.booking-form__field:has(#booking-message).booking-form__field--filled label {
+  top: auto;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
+/* Serviço que deseja * (personalizado): título em cima e placeholder visível, igual aos outros */
+.booking-form__field:has(#booking-custom-service) label {
+  position: static;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+.booking-form__field:has(#booking-custom-service) textarea {
+  padding: 0.9rem 1.1rem;
+}
+.booking-form__field:has(#booking-custom-service) textarea::placeholder {
+  color: #94a3b8;
+}
+.booking-form__field:has(#booking-custom-service):focus-within label,
+.booking-form__field:has(#booking-custom-service).booking-form__field--filled label {
   top: auto;
   font-size: 0.9rem;
   color: #334155;
