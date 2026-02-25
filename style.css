@@ -2444,6 +2444,32 @@ button {
   color: #334155;
 }
 
+/* Nome completo e WhatsApp: label fora do input, igual ao Veículo */
+.booking-form__field:has(#booking-name) label,
+.booking-form__field:has(#booking-phone) label {
+  position: static;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #334155;
+  margin-bottom: 0.35rem;
+}
+.booking-form__field:has(#booking-name) input,
+.booking-form__field:has(#booking-phone) input {
+  padding: 0.9rem 1.1rem;
+}
+.booking-form__field:has(#booking-name) input::placeholder,
+.booking-form__field:has(#booking-phone) input::placeholder {
+  color: #94a3b8;
+}
+.booking-form__field:has(#booking-name):focus-within label,
+.booking-form__field:has(#booking-name).booking-form__field--filled label,
+.booking-form__field:has(#booking-phone):focus-within label,
+.booking-form__field:has(#booking-phone).booking-form__field--filled label {
+  top: auto;
+  font-size: 0.9rem;
+  color: #334155;
+}
+
 .booking-step__actions {
   display: flex;
   gap: 1rem;
